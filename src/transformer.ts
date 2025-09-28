@@ -550,9 +550,10 @@ export default function tailwindTransformer(program?: ts.Program): ts.Transforme
 
 		return (sourceFile: ts.SourceFile): ts.SourceFile => {
 			// Only process .tsx and .jsx files
-			if (!sourceFile.fileName.endsWith('.tsx') && !sourceFile.fileName.endsWith('.jsx')) {
+			if (!sourceFile.fileName.endsWith(".tsx") && !sourceFile.fileName.endsWith(".jsx")) {
 				return sourceFile;
-			}				function visitor(node: ts.Node): ts.Node {
+			}
+			function visitor(node: ts.Node): ts.Node {
 					if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
 						const attributes = ts.isJsxElement(node) ? node.openingElement.attributes : node.attributes;
 
@@ -561,11 +562,7 @@ export default function tailwindTransformer(program?: ts.Program): ts.Transforme
 
 						// Find className attribute and separate other attributes
 						for (const attr of attributes.properties) {
-							if (
-								ts.isJsxAttribute(attr) &&
-								ts.isIdentifier(attr.name) &&
-								attr.name.text === "className"
-							) {
+						if (ts.isJsxAttribute(attr) && ts.isIdentifier(attr.name) && attr.name.text === "className") {
 								classNameAttr = attr;
 							} else {
 								otherAttributes.push(attr);
@@ -589,11 +586,7 @@ export default function tailwindTransformer(program?: ts.Program): ts.Transforme
 							}
 
 							// Parse classes even if classNames is empty (to ensure className is removed)
-							const { properties, uiElements } = parseClasses(
-								classNames,
-								dynamicClassMap,
-								false,
-							);
+						const { properties, uiElements } = parseClasses(classNames, dynamicClassMap, false);
 
 							// Create new attributes from Tailwind classes (excluding className)
 							const newAttributes: ts.JsxAttributeLike[] = [...otherAttributes];
@@ -654,7 +647,9 @@ export default function tailwindTransformer(program?: ts.Program): ts.Transforme
 								}
 							} else {
 								// JSX element with children - visit existing children first
-								const visitedChildren = node.children.map(child => ts.visitNode(child, visitor) as ts.JsxChild);
+							const visitedChildren = node.children.map(
+								(child) => ts.visitNode(child, visitor) as ts.JsxChild,
+							);
 								const newChildren: ts.JsxChild[] = [...uiElementChildren, ...visitedChildren];
 
 								return factory.createJsxElement(
