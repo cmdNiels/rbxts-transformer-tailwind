@@ -540,12 +540,12 @@ function createPropertyValue(factory: ts.NodeFactory, key: string, value: any): 
 export default function tailwindTransformer(program?: ts.Program): ts.TransformerFactory<ts.SourceFile> {
 	return (context: ts.TransformationContext) => {
 		const { factory } = context;
-		
+
 		// Load Tailwind config and create class map
 		const projectRoot = process.cwd();
 		const tailwindConfig = loadTailwindConfig(projectRoot);
 		const dynamicClassMap = createClassMap(tailwindConfig);
-		
+
 		console.log("🎨 Local transformer loaded! Classes:", Object.keys(dynamicClassMap).length);
 
 		return (sourceFile: ts.SourceFile): ts.SourceFile => {
@@ -554,121 +554,121 @@ export default function tailwindTransformer(program?: ts.Program): ts.Transforme
 				return sourceFile;
 			}
 			function visitor(node: ts.Node): ts.Node {
-					if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
-						const attributes = ts.isJsxElement(node) ? node.openingElement.attributes : node.attributes;
+				if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+					const attributes = ts.isJsxElement(node) ? node.openingElement.attributes : node.attributes;
 
-						let classNameAttr: ts.JsxAttribute | undefined;
-						const otherAttributes: ts.JsxAttributeLike[] = [];
+					let classNameAttr: ts.JsxAttribute | undefined;
+					const otherAttributes: ts.JsxAttributeLike[] = [];
 
-						// Find className attribute and separate other attributes
-						for (const attr of attributes.properties) {
+					// Find className attribute and separate other attributes
+					for (const attr of attributes.properties) {
 						if (ts.isJsxAttribute(attr) && ts.isIdentifier(attr.name) && attr.name.text === "className") {
-								classNameAttr = attr;
-							} else {
-								otherAttributes.push(attr);
+							classNameAttr = attr;
+						} else {
+							otherAttributes.push(attr);
+						}
+					}
+
+					// If we found a className attribute, process it and transform the element
+					if (classNameAttr && classNameAttr.initializer) {
+						let classNames: string = "";
+
+						if (ts.isStringLiteral(classNameAttr.initializer)) {
+							// Handle direct string literal: className="w-4 h-4"
+							classNames = classNameAttr.initializer.text;
+						} else if (
+							ts.isJsxExpression(classNameAttr.initializer) &&
+							classNameAttr.initializer.expression &&
+							ts.isStringLiteral(classNameAttr.initializer.expression)
+						) {
+							// Handle JSX expression with string literal: className={"w-4 h-4"}
+							classNames = classNameAttr.initializer.expression.text;
+						}
+
+						// Parse classes even if classNames is empty (to ensure className is removed)
+						const { properties, uiElements } = parseClasses(classNames, dynamicClassMap, false);
+
+						// Create new attributes from Tailwind classes (excluding className)
+						const newAttributes: ts.JsxAttributeLike[] = [...otherAttributes];
+
+						// Add properties as attributes
+						for (const key of Object.keys(properties as any)) {
+							if ((properties as any).hasOwnProperty(key)) {
+								const value = (properties as any)[key];
+								newAttributes.push(
+									factory.createJsxAttribute(
+										factory.createIdentifier(key),
+										factory.createJsxExpression(
+											undefined,
+											createPropertyValue(factory, key, value),
+										),
+									),
+								);
 							}
 						}
 
-						// If we found a className attribute, process it and transform the element
-						if (classNameAttr && classNameAttr.initializer) {
-							let classNames: string = "";
-
-							if (ts.isStringLiteral(classNameAttr.initializer)) {
-								// Handle direct string literal: className="w-4 h-4"
-								classNames = classNameAttr.initializer.text;
-							} else if (
-								ts.isJsxExpression(classNameAttr.initializer) &&
-								classNameAttr.initializer.expression &&
-								ts.isStringLiteral(classNameAttr.initializer.expression)
-							) {
-								// Handle JSX expression with string literal: className={"w-4 h-4"}
-								classNames = classNameAttr.initializer.expression.text;
+						// Create UI element children
+						const uiElementChildren: ts.JsxElement[] = [];
+						for (const element of uiElements) {
+							const uiElement = createUIElement(factory, element);
+							if (uiElement) {
+								uiElementChildren.push(uiElement);
 							}
+						}
 
-							// Parse classes even if classNames is empty (to ensure className is removed)
-						const { properties, uiElements } = parseClasses(classNames, dynamicClassMap, false);
-
-							// Create new attributes from Tailwind classes (excluding className)
-							const newAttributes: ts.JsxAttributeLike[] = [...otherAttributes];
-
-							// Add properties as attributes
-							for (const key of Object.keys(properties as any)) {
-								if ((properties as any).hasOwnProperty(key)) {
-									const value = (properties as any)[key];
-									newAttributes.push(
-										factory.createJsxAttribute(
-											factory.createIdentifier(key),
-											factory.createJsxExpression(
-												undefined,
-												createPropertyValue(factory, key, value),
-											),
-										),
-									);
-								}
-							}
-
-							// Create UI element children
-							const uiElementChildren: ts.JsxElement[] = [];
-							for (const element of uiElements) {
-								const uiElement = createUIElement(factory, element);
-								if (uiElement) {
-									uiElementChildren.push(uiElement);
-								}
-							}
-
-							// Transform the element based on its type
-							if (ts.isJsxSelfClosingElement(node)) {
-								// Convert self-closing to regular element if we need to add UI children
-								if (uiElementChildren.length > 0) {
-									return ts.visitEachChild(
-										factory.createJsxElement(
-											factory.createJsxOpeningElement(
-												node.tagName,
-												node.typeArguments,
-												factory.createJsxAttributes(newAttributes),
-											),
-											uiElementChildren,
-											factory.createJsxClosingElement(node.tagName),
-										),
-										visitor,
-										context,
-									);
-								} else {
-									return ts.visitEachChild(
-										factory.updateJsxSelfClosingElement(
-											node,
+						// Transform the element based on its type
+						if (ts.isJsxSelfClosingElement(node)) {
+							// Convert self-closing to regular element if we need to add UI children
+							if (uiElementChildren.length > 0) {
+								return ts.visitEachChild(
+									factory.createJsxElement(
+										factory.createJsxOpeningElement(
 											node.tagName,
 											node.typeArguments,
 											factory.createJsxAttributes(newAttributes),
 										),
-										visitor,
-										context,
-									);
-								}
+										uiElementChildren,
+										factory.createJsxClosingElement(node.tagName),
+									),
+									visitor,
+									context,
+								);
 							} else {
-								// JSX element with children - visit existing children first
+								return ts.visitEachChild(
+									factory.updateJsxSelfClosingElement(
+										node,
+										node.tagName,
+										node.typeArguments,
+										factory.createJsxAttributes(newAttributes),
+									),
+									visitor,
+									context,
+								);
+							}
+						} else {
+							// JSX element with children - visit existing children first
 							const visitedChildren = node.children.map(
 								(child) => ts.visitNode(child, visitor) as ts.JsxChild,
 							);
-								const newChildren: ts.JsxChild[] = [...uiElementChildren, ...visitedChildren];
+							const newChildren: ts.JsxChild[] = [...uiElementChildren, ...visitedChildren];
 
-								return factory.createJsxElement(
-									factory.createJsxOpeningElement(
-										node.openingElement.tagName,
-										node.openingElement.typeArguments,
-										factory.createJsxAttributes(newAttributes),
-									),
-									newChildren,
-									node.closingElement,
-								);
-							}
+							return factory.createJsxElement(
+								factory.createJsxOpeningElement(
+									node.openingElement.tagName,
+									node.openingElement.typeArguments,
+									factory.createJsxAttributes(newAttributes),
+								),
+								newChildren,
+								node.closingElement,
+							);
 						}
 					}
-
-					return ts.visitEachChild(node, visitor, context);
 				}
 
-				return ts.visitNode(sourceFile, visitor) as ts.SourceFile;
-			};
+				return ts.visitEachChild(node, visitor, context);
+			}
+
+			return ts.visitNode(sourceFile, visitor) as ts.SourceFile;
 		};
+	};
 }
