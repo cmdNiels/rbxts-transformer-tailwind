@@ -10,7 +10,13 @@ import * as fs from "fs";
 export interface TailwindTransformerConfig {
 	/** Custom class mappings to add or override */
 	customClasses?: Record<string, ClassMapping>;
-	/** Path to tailwind config file (optional) */
+	/** Path to tailwind config				]),
+				[],
+				factory.createJsxClosingElement(factory.createIdentifier("uipadding")),
+			);
+		}
+
+		case "corner":(optional) */
 	tailwindConfigPath?: string;
 	/** Whether to warn about unknown classes */
 	warnUnknownClasses?: boolean;
@@ -39,6 +45,60 @@ export interface ClassMapping {
 		y?: UDimValue;
 	};
 	_uiElement?: string;
+}
+
+export interface TailwindConfig {
+	theme?: {
+		extend?: {
+			colors?: Record<string, string>;
+		};
+	};
+}
+
+export interface UIElement {
+	type: string;
+	top?: number;
+	bottom?: number;
+	left?: number;
+	right?: number;
+	vertical?: number;
+	horizontal?: number;
+	all?: number;
+	radius?: number;
+	direction?: string;
+	spacing?: number;
+	horizontalAlignment?: string;
+	verticalAlignment?: string;
+	thickness?: number;
+	color?: RGBColor;
+	transparency?: number;
+}
+
+export interface TailwindConfig {
+	theme?: {
+		extend?: {
+			colors?: Record<string, string>;
+		};
+	};
+}
+
+export interface UIElement {
+	type: string;
+	top?: number;
+	bottom?: number;
+	left?: number;
+	right?: number;
+	vertical?: number;
+	horizontal?: number;
+	all?: number;
+	radius?: number;
+	direction?: string;
+	spacing?: number;
+	horizontalAlignment?: string;
+	verticalAlignment?: string;
+	thickness?: number;
+	color?: RGBColor;
+	transparency?: number;
 }
 
 // Load Tailwind configuration
@@ -219,8 +279,9 @@ function createClassMap(
 	};
 
 	// Extend with Tailwind config if available
-	if ((tailwindConfig as any)?.theme?.extend?.colors) {
-		for (const [colorName, colorValue] of Object.entries((tailwindConfig as any).theme.extend.colors)) {
+	const config = tailwindConfig as TailwindConfig;
+	if (config?.theme?.extend?.colors) {
+		for (const [colorName, colorValue] of Object.entries(config.theme.extend.colors)) {
 			if (typeof colorValue === "string") {
 				const rgb = hexToRgb(colorValue);
 				if (rgb) {
@@ -256,7 +317,7 @@ function parseClasses(
 				}
 				// Merge properties for the same UI element type
 				for (const key of Object.keys(mapping)) {
-					if (key !== "_uiElement" && mapping.hasOwnProperty(key)) {
+					if (key !== "_uiElement" && Object.prototype.hasOwnProperty.call(mapping, key)) {
 						uiElementsMap[elementType][key] = mapping[key];
 					}
 				}
@@ -266,8 +327,8 @@ function parseClasses(
 				if (mapping.Size.y) size.y = mapping.Size.y;
 			} else {
 				for (const key of Object.keys(mapping)) {
-					if (mapping.hasOwnProperty(key)) {
-						(properties as any)[key] = mapping[key];
+					if (Object.prototype.hasOwnProperty.call(mapping, key)) {
+						(properties as Record<string, unknown>)[key] = mapping[key];
 					}
 				}
 			}
@@ -281,7 +342,7 @@ function parseClasses(
 
 	// Build final Size if either x or y was specified
 	if (size.x || size.y) {
-		(properties as any).Size = {
+		(properties as Record<string, unknown>).Size = {
 			x: size.x || { scale: 0, offset: 0 },
 			y: size.y || { scale: 0, offset: 0 },
 		};
@@ -330,13 +391,16 @@ function createEnumExpression(factory: ts.NodeFactory, enumType: string, enumVal
 	);
 }
 
-function createUIElement(factory: ts.NodeFactory, element: any): ts.JsxElement | undefined {
+function createUIElement(factory: ts.NodeFactory, element: UIElement): ts.JsxElement | undefined {
 	switch (element.type) {
-		case "padding":
-			const paddingTop = element.top || element.vertical || element.all || 0;
-			const paddingBottom = element.bottom || element.vertical || element.all || 0;
-			const paddingLeft = element.left || element.horizontal || element.all || 0;
-			const paddingRight = element.right || element.horizontal || element.all || 0;
+		case "padding": {
+			const paddingTop = (element.top as number) || (element.vertical as number) || (element.all as number) || 0;
+			const paddingBottom =
+				(element.bottom as number) || (element.vertical as number) || (element.all as number) || 0;
+			const paddingLeft =
+				(element.left as number) || (element.horizontal as number) || (element.all as number) || 0;
+			const paddingRight =
+				(element.right as number) || (element.horizontal as number) || (element.all as number) || 0;
 
 			return factory.createJsxElement(
 				factory.createJsxOpeningElement(
@@ -388,8 +452,9 @@ function createUIElement(factory: ts.NodeFactory, element: any): ts.JsxElement |
 				[],
 				factory.createJsxClosingElement(factory.createIdentifier("uipadding")),
 			);
+		}
 
-		case "corner":
+		case "corner": {
 			return factory.createJsxElement(
 				factory.createJsxOpeningElement(
 					factory.createIdentifier("uicorner"),
@@ -401,7 +466,7 @@ function createUIElement(factory: ts.NodeFactory, element: any): ts.JsxElement |
 								undefined,
 								factory.createNewExpression(factory.createIdentifier("UDim"), undefined, [
 									factory.createNumericLiteral(0),
-									factory.createNumericLiteral(element.radius),
+									factory.createNumericLiteral(element.radius as number),
 								]),
 							),
 						),
@@ -410,8 +475,9 @@ function createUIElement(factory: ts.NodeFactory, element: any): ts.JsxElement |
 				[],
 				factory.createJsxClosingElement(factory.createIdentifier("uicorner")),
 			);
+		}
 
-		case "listLayout":
+		case "listLayout": {
 			const attributes = [
 				factory.createJsxAttribute(
 					factory.createIdentifier("SortOrder"),
@@ -421,7 +487,7 @@ function createUIElement(factory: ts.NodeFactory, element: any): ts.JsxElement |
 					factory.createIdentifier("FillDirection"),
 					factory.createJsxExpression(
 						undefined,
-						createEnumExpression(factory, "FillDirection", element.direction),
+						createEnumExpression(factory, "FillDirection", element.direction as string),
 					),
 				),
 			];
@@ -434,7 +500,7 @@ function createUIElement(factory: ts.NodeFactory, element: any): ts.JsxElement |
 							undefined,
 							factory.createNewExpression(factory.createIdentifier("UDim"), undefined, [
 								factory.createNumericLiteral(0),
-								factory.createNumericLiteral(element.spacing),
+								factory.createNumericLiteral(element.spacing as number),
 							]),
 						),
 					),
@@ -474,8 +540,9 @@ function createUIElement(factory: ts.NodeFactory, element: any): ts.JsxElement |
 				[],
 				factory.createJsxClosingElement(factory.createIdentifier("uilistlayout")),
 			);
+		}
 
-		case "stroke":
+		case "stroke": {
 			return factory.createJsxElement(
 				factory.createJsxOpeningElement(
 					factory.createIdentifier("uistroke"),
@@ -483,11 +550,17 @@ function createUIElement(factory: ts.NodeFactory, element: any): ts.JsxElement |
 					factory.createJsxAttributes([
 						factory.createJsxAttribute(
 							factory.createIdentifier("Thickness"),
-							factory.createJsxExpression(undefined, factory.createNumericLiteral(element.thickness)),
+							factory.createJsxExpression(
+								undefined,
+								factory.createNumericLiteral(element.thickness as number),
+							),
 						),
 						factory.createJsxAttribute(
 							factory.createIdentifier("Color"),
-							factory.createJsxExpression(undefined, createColor3Expression(factory, element.color)),
+							factory.createJsxExpression(
+								undefined,
+								createColor3Expression(factory, element.color as RGBColor),
+							),
 						),
 						...(element.transparency
 							? [
@@ -495,7 +568,7 @@ function createUIElement(factory: ts.NodeFactory, element: any): ts.JsxElement |
 										factory.createIdentifier("Transparency"),
 										factory.createJsxExpression(
 											undefined,
-											factory.createNumericLiteral(element.transparency),
+											factory.createNumericLiteral(element.transparency as number),
 										),
 									),
 							  ]
@@ -505,29 +578,32 @@ function createUIElement(factory: ts.NodeFactory, element: any): ts.JsxElement |
 				[],
 				factory.createJsxClosingElement(factory.createIdentifier("uistroke")),
 			);
+		}
 	}
 
 	return undefined;
 }
 
-function createPropertyValue(factory: ts.NodeFactory, key: string, value: any): ts.Expression {
+function createPropertyValue(factory: ts.NodeFactory, key: string, value: unknown): ts.Expression {
 	switch (key) {
 		case "BackgroundColor3":
 		case "TextColor3":
-			return createColor3Expression(factory, value);
+			return createColor3Expression(factory, value as RGBColor);
 		case "Size":
-			return createUDim2Expression(factory, value)!;
+			return createUDim2Expression(factory, value as SizeValue)!;
 		case "TextXAlignment":
-			return createEnumExpression(factory, "TextXAlignment", value);
+			return createEnumExpression(factory, "TextXAlignment", value as string);
 		case "Font":
-			return createEnumExpression(factory, "Font", value);
+			return createEnumExpression(factory, "Font", value as string);
 		default:
 			if (typeof value === "string") {
 				return factory.createStringLiteral(value);
 			} else if (typeof value === "number") {
 				return factory.createNumericLiteral(value);
+			} else if (value != null) {
+				return factory.createStringLiteral(String(value));
 			} else {
-				return factory.createStringLiteral(value.toString());
+				return factory.createStringLiteral("");
 			}
 	}
 }
@@ -537,7 +613,7 @@ function createPropertyValue(factory: ts.NodeFactory, key: string, value: any): 
  * @param config - Transformer configuration options
  * @returns TypeScript transformer factory
  */
-export default function tailwindTransformer(program?: ts.Program): ts.TransformerFactory<ts.SourceFile> {
+export default function tailwindTransformer(): ts.TransformerFactory<ts.SourceFile> {
 	return (context: ts.TransformationContext) => {
 		const { factory } = context;
 
@@ -592,9 +668,9 @@ export default function tailwindTransformer(program?: ts.Program): ts.Transforme
 						const newAttributes: ts.JsxAttributeLike[] = [...otherAttributes];
 
 						// Add properties as attributes
-						for (const key of Object.keys(properties as any)) {
-							if ((properties as any).hasOwnProperty(key)) {
-								const value = (properties as any)[key];
+						for (const key of Object.keys(properties as Record<string, unknown>)) {
+							if (Object.prototype.hasOwnProperty.call(properties, key)) {
+								const value = (properties as Record<string, unknown>)[key];
 								newAttributes.push(
 									factory.createJsxAttribute(
 										factory.createIdentifier(key),
@@ -610,7 +686,7 @@ export default function tailwindTransformer(program?: ts.Program): ts.Transforme
 						// Create UI element children
 						const uiElementChildren: ts.JsxElement[] = [];
 						for (const element of uiElements) {
-							const uiElement = createUIElement(factory, element);
+							const uiElement = createUIElement(factory, element as UIElement);
 							if (uiElement) {
 								uiElementChildren.push(uiElement);
 							}
