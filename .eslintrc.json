@@ -7,16 +7,10 @@
 		"sourceType": "module",
 		"project": "./tsconfig.json"
 	},
-	"ignorePatterns": ["/out", "/build", "tailwind.config.js"],
-	"plugins": ["@typescript-eslint", "roblox-ts", "prettier"],
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"plugin:roblox-ts/recommended-legacy",
-		"plugin:prettier/recommended"
-	],
+	"ignorePatterns": ["/out"],
+	"plugins": ["@typescript-eslint", "prettier"],
+	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
 	"rules": {
-		"prettier/prettier": "warn",
-		"roblox-ts/lua-truthiness": "off"
+		"prettier/prettier": "warn"
 	}
 }
