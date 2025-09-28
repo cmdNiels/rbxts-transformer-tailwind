@@ -3,7 +3,7 @@
  */
 
 import * as ts from "typescript";
-import type { RGBColor } from "../types";
+import RGBColor from "../../types/RGBColor";
 
 /**
  * Create Color3.fromRGB expression

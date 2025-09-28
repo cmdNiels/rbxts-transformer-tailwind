@@ -1,4 +1,3 @@
-// Tailwind className support for Roblox React elements
 declare namespace JSX {
 	interface IntrinsicElements {
 		// GUI Elements

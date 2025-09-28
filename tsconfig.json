@@ -7,7 +7,7 @@
 		"declarationMap": true,
 		"sourceMap": true,
 		"outDir": "./out",
-		"rootDir": "./src",
+		"rootDir": "./",
 		"strict": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
@@ -17,6 +17,6 @@
 		"resolveJsonModule": true,
 		"skipDefaultLibCheck": true
 	},
-	"include": ["src/**/*", "types/**/*"],
+	"include": ["./**/*.ts", "react-jsx.d.ts"],
 	"exclude": ["node_modules", "out"]
 }

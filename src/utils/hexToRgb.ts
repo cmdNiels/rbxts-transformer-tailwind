@@ -2,7 +2,7 @@
  * Convert hex color string to RGB color object
  */
 
-import type { RGBColor } from "../types";
+import RGBColor from "../../types/RGBColor";
 
 /**
  * Convert hex color string to RGB color object

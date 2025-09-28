@@ -1,6 +1,6 @@
 import UDimValue from "./UDimValue";
 
-interface ClassMapping {
+export default interface ClassMapping {
 	[key: string]: unknown;
 	Size?: {
 		x?: UDimValue;
@@ -8,5 +8,3 @@ interface ClassMapping {
 	};
 	_uiElement?: string;
 }
-
-export default ClassMapping;

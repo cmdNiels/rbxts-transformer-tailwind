@@ -4,12 +4,13 @@
  */
 
 import * as ts from "typescript";
-import type { TailwindTransformerConfig, UIElement } from "./types";
 import loadTailwindConfig from "./utils/loadTailwindConfig";
 import createClassMap from "./utils/createClassMap";
 import parseClasses from "./utils/parseClasses";
 import createUIElement from "./utils/createUIElement";
 import createPropertyValue from "./utils/createPropertyValue";
+import TailwindTransformerConfig from "../types/TailwindTransformerConfig";
+import UIElement from "../types/UIElement";
 
 /**
  * Creates a Tailwind CSS transformer for roblox-ts

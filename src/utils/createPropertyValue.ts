@@ -1,8 +1,9 @@
 import ts from "typescript";
-import type { RGBColor, SizeValue } from "../types";
 import createColor3Expression from "../expressions/createColor3Expression";
 import createUDim2Expression from "../expressions/createUDim2Expression";
 import createEnumExpression from "../expressions/createEnumExpression";
+import RGBColor from "../../types/RGBColor";
+import SizeValue from "../../types/SizeValue";
 
 /**
  * Create property value expression based on key and value

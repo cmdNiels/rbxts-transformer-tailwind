@@ -2,7 +2,8 @@
  * Create class mappings with Tailwind config support
  */
 
-import type { TailwindConfig, ClassMapping } from "../types";
+import ClassMapping from "../../types/ClassMapping";
+import TailwindConfig from "../../types/TailwindConfig";
 import hexToRgb from "./hexToRgb";
 
 /**

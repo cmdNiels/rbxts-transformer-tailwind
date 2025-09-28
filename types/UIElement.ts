@@ -1,6 +1,6 @@
 import RGBColor from "./RGBColor";
 
-interface UIElement {
+export default interface UIElement {
 	type: string;
 	top?: number;
 	bottom?: number;
@@ -18,5 +18,3 @@ interface UIElement {
 	color?: RGBColor;
 	transparency?: number;
 }
-
-export default UIElement;

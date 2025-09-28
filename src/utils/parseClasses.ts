@@ -2,7 +2,8 @@
  * Parse className string into properties and UI elements
  */
 
-import type { ClassMapping, SizeValue } from "../types";
+import ClassMapping from "../../types/ClassMapping";
+import SizeValue from "../../types/SizeValue";
 
 /**
  * Parse className string into properties and UI elements

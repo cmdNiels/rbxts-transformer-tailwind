@@ -1,7 +1,5 @@
-interface RGBColor {
+export default interface RGBColor {
 	r: number;
 	g: number;
 	b: number;
 }
-
-export default RGBColor;

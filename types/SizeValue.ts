@@ -1,8 +1,6 @@
 import UDimValue from "./UDimValue";
 
-interface SizeValue {
+export default interface SizeValue {
 	x?: UDimValue;
 	y?: UDimValue;
 }
-
-export default SizeValue;
