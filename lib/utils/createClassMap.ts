@@ -6,7 +6,6 @@ import widthClasses from "../data/widthClasses";
 import heightClasses from "../data/heightClasses";
 import backgroundClasses from "../data/backgroundClasses";
 import textClasses from "../data/textClasses";
-import spacingClasses from "../data/spacingClasses";
 import borderClasses from "../data/borderClasses";
 import typographyClasses from "../data/typographyClasses";
 import layoutClasses from "../data/layoutClasses";
@@ -16,6 +15,7 @@ import placeholderClasses from "../data/placeholderClasses";
 import ClassMapping from "../../types/ClassMapping";
 import TailwindConfig from "../../types/TailwindConfig";
 import hexToRgb from "./hexToRgb";
+import paddingClasses from "../data/paddingClasses";
 
 /**
  * Create class mappings with Tailwind config support
@@ -30,7 +30,7 @@ export default function createClassMap(
 		...heightClasses,
 		...backgroundClasses,
 		...textClasses,
-		...spacingClasses,
+		...paddingClasses,
 		...borderClasses,
 		...typographyClasses,
 		...layoutClasses,
