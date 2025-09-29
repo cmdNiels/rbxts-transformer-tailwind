@@ -8,9 +8,49 @@
 		"project": "./tsconfig.json"
 	},
 	"ignorePatterns": ["/out"],
-	"plugins": ["@typescript-eslint", "prettier"],
+	"plugins": ["@typescript-eslint", "prettier", "unused-imports", "simple-import-sort"],
 	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
 	"rules": {
-		"prettier/prettier": "warn"
+		"prettier/prettier": "warn",
+		"import/no-extraneous-dependencies": "warn",
+		"no-param-reassign": "off",
+		"consistent-return": "off",
+		"no-empty-pattern": "off",
+		"no-nested-ternary": "off",
+		"no-use-before-define": "off",
+		"no-shadow": "off",
+		"no-continue": "off",
+		"@typescript-eslint/no-shadow": "off",
+		"@typescript-eslint/no-use-before-define": "off",
+		"import/extensions": "off",
+		"@typescript-eslint/comma-dangle": "off",
+		"@typescript-eslint/consistent-type-imports": "error",
+		"no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
+		"import/prefer-default-export": "off",
+		"simple-import-sort/imports": "error",
+		"simple-import-sort/exports": "error",
+		"import/order": "off",
+		"@typescript-eslint/no-unused-vars": "off",
+		"unused-imports/no-unused-imports": "error",
+		"no-unused-vars": "off",
+		"@typescript-eslint/naming-convention": "off",
+		"unused-imports/no-unused-vars": [
+			"warn",
+			{
+				"vars": "all",
+				"varsIgnorePattern": "^_",
+				"args": "after-used",
+				"argsIgnorePattern": "^_"
+			}
+		],
+		"@dword-design/import-alias/prefer-alias": [
+			"error",
+			{
+				"alias": {
+					"@": "."
+				},
+				"aliasForSubpaths": true
+			}
+		]
 	}
 }
