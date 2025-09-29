@@ -39,7 +39,6 @@
 		"typescript": ">=4.0.0"
 	},
 	"devDependencies": {
-		"@dword-design/eslint-plugin-import-alias": "5.1.2",
 		"@rbxts/react": "^17.2.3",
 		"@rbxts/types": "^1.0.881",
 		"@types/node": "^20.0.0",

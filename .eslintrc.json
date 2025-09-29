@@ -8,13 +8,12 @@
 		"project": "./tsconfig.json"
 	},
 	"ignorePatterns": ["/out"],
-	"plugins": ["@typescript-eslint", "prettier", "unused-imports", "simple-import-sort", "@dword-design/import-alias"],
+	"plugins": ["@typescript-eslint", "prettier", "unused-imports", "simple-import-sort"],
 	"extends": [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
 		"plugin:import/recommended",
 		"plugin:import/typescript",
-		"plugin:@dword-design/import-alias/recommended",
 		"plugin:prettier/recommended"
 	],
 	"settings": {
@@ -22,9 +21,6 @@
 			"typescript": {
 				"alwaysTryTypes": true,
 				"project": "./tsconfig.json"
-			},
-			"alias": {
-				"@": "."
 			}
 		}
 	},
@@ -59,15 +55,6 @@
 				"varsIgnorePattern": "^_",
 				"args": "after-used",
 				"argsIgnorePattern": "^_"
-			}
-		],
-		"@dword-design/import-alias/prefer-alias": [
-			"error",
-			{
-				"alias": {
-					"@": "."
-				},
-				"aliasForSubpaths": true
 			}
 		]
 	}
