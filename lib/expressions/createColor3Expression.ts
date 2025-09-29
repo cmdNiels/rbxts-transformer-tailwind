@@ -2,8 +2,9 @@
  * TypeScript expression utilities for rbxts-transformer-tailwind
  */
 
-import * as ts from "typescript";
-import RGBColor from "../../types/RGBColor";
+import type * as ts from "typescript";
+
+import type RGBColor from "@/types/RGBColor";
 
 /**
  * Create Color3.fromRGB expression

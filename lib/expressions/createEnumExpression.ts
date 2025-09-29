@@ -2,7 +2,7 @@
  * TypeScript expression utilities for rbxts-transformer-tailwind
  */
 
-import * as ts from "typescript";
+import type * as ts from "typescript";
 
 /**
  * Create Enum property access expression

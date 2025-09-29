@@ -1,9 +1,10 @@
-import ts from "typescript";
-import createColor3Expression from "../expressions/createColor3Expression";
-import createUDim2Expression from "../expressions/createUDim2Expression";
-import createEnumExpression from "../expressions/createEnumExpression";
-import RGBColor from "../../types/RGBColor";
-import SizeValue from "../../types/SizeValue";
+import type ts from "typescript";
+
+import createColor3Expression from "@/lib/expressions/createColor3Expression";
+import createEnumExpression from "@/lib/expressions/createEnumExpression";
+import createUDim2Expression from "@/lib/expressions/createUDim2Expression";
+import type RGBColor from "@/types/RGBColor";
+import type SizeValue from "@/types/SizeValue";
 
 /**
  * Helper function to create boolean expressions

@@ -1,4 +1,4 @@
-import UDimValue from "./UDimValue";
+import type UDimValue from "./UDimValue";
 
 export default interface SizeValue {
 	x?: UDimValue;

@@ -1,4 +1,4 @@
-import { RGBColor } from "../../types";
+import type { RGBColor } from "@/types";
 
 /**
  * Single source of truth for all Tailwind CSS color values

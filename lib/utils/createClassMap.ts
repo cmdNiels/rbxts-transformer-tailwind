@@ -2,20 +2,21 @@
  * Create class mappings with Tailwind config support
  */
 
-import widthClasses from "../data/widthClasses";
-import heightClasses from "../data/heightClasses";
-import backgroundClasses from "../data/backgroundClasses";
-import textClasses from "../data/textClasses";
-import borderClasses from "../data/borderClasses";
-import typographyClasses from "../data/typographyClasses";
-import layoutClasses from "../data/layoutClasses";
-import gapClasses from "../data/gapClasses";
-import imageClasses from "../data/imageClasses";
-import placeholderClasses from "../data/placeholderClasses";
-import ClassMapping from "../../types/ClassMapping";
-import TailwindConfig from "../../types/TailwindConfig";
+import backgroundClasses from "@/lib/data/backgroundClasses";
+import borderClasses from "@/lib/data/borderClasses";
+import gapClasses from "@/lib/data/gapClasses";
+import heightClasses from "@/lib/data/heightClasses";
+import imageClasses from "@/lib/data/imageClasses";
+import layoutClasses from "@/lib/data/layoutClasses";
+import paddingClasses from "@/lib/data/paddingClasses";
+import placeholderClasses from "@/lib/data/placeholderClasses";
+import textClasses from "@/lib/data/textClasses";
+import typographyClasses from "@/lib/data/typographyClasses";
+import widthClasses from "@/lib/data/widthClasses";
+import type ClassMapping from "@/types/ClassMapping";
+import type TailwindConfig from "@/types/TailwindConfig";
+
 import hexToRgb from "./hexToRgb";
-import paddingClasses from "../data/paddingClasses";
 
 /**
  * Create class mappings with Tailwind config support

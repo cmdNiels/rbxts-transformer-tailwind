@@ -1,4 +1,4 @@
-import { ClassMapping } from "../../types";
+import type { ClassMapping } from "@/types";
 
 export default {
 	// All-direction padding

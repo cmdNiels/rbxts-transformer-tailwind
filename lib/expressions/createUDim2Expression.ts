@@ -2,8 +2,9 @@
  * TypeScript expression utilities for rbxts-transformer-tailwind
  */
 
-import * as ts from "typescript";
-import SizeValue from "../../types/SizeValue";
+import type * as ts from "typescript";
+
+import type SizeValue from "@/types/SizeValue";
 
 /**
  * Create UDim2 constructor expression

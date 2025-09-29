@@ -1,5 +1,5 @@
-import { ClassMapping } from "../../../types";
-import { tailwindColors } from "../../data/tailwindColors";
+import { tailwindColors } from "@/lib/data/tailwindColors";
+import type { ClassMapping } from "@/types";
 
 export default function generateTextColorClasses(includeColors?: string[]): Record<string, ClassMapping> {
 	const classes: Record<string, ClassMapping> = {};

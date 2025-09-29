@@ -1,5 +1,5 @@
-import { ClassMapping } from "../../types";
-import generateBorderColorClasses from "../utils/colors/generateBorderColorClasses";
+import generateBorderColorClasses from "@/lib/utils/colors/generateBorderColorClasses";
+import type { ClassMapping } from "@/types";
 
 export default {
 	// Border radius

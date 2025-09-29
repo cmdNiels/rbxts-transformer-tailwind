@@ -1,5 +1,5 @@
-import { ClassMapping } from "../../../types";
-import { tailwindColors } from "../../data/tailwindColors";
+import { tailwindColors } from "@/lib/data/tailwindColors";
+import type { ClassMapping } from "@/types";
 
 /**
  * Generates border color classes with special handling for border elements

@@ -2,9 +2,10 @@
  * Load Tailwind configuration from project directory
  */
 
-import * as path from "path";
 import * as fs from "fs";
-import TailwindConfig from "../../types/TailwindConfig";
+import * as path from "path";
+
+import type TailwindConfig from "@/types/TailwindConfig";
 
 /**
  * Load Tailwind configuration from project directory
@@ -22,8 +23,9 @@ export default function loadTailwindConfig(projectRoot: string, configPath?: str
 		if (fs.existsSync(fullPath)) {
 			try {
 				// Clear require cache to ensure fresh config
+				// eslint-disable-next-line @typescript-eslint/no-require-imports
 				delete require.cache[require.resolve(fullPath)];
-				// eslint-disable-next-line @typescript-eslint/no-var-requires
+				// eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
 				return require(fullPath) as TailwindConfig;
 			} catch (e) {
 				console.warn(`Failed to load Tailwind config from ${fullPath}:`, e);

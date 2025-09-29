@@ -2,11 +2,12 @@
  * Create JSX element for UI components
  */
 
-import * as ts from "typescript";
-import createColor3Expression from "../expressions/createColor3Expression";
-import createEnumExpression from "../expressions/createEnumExpression";
-import UIElement from "../../types/UIElement";
-import RGBColor from "../../types/RGBColor";
+import type * as ts from "typescript";
+
+import createColor3Expression from "@/lib/expressions/createColor3Expression";
+import createEnumExpression from "@/lib/expressions/createEnumExpression";
+import type RGBColor from "@/types/RGBColor";
+import type UIElement from "@/types/UIElement";
 
 /**
  * Create JSX element for UI components
@@ -194,7 +195,7 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 											factory.createNumericLiteral(element.transparency as number),
 										),
 									),
-							  ]
+								]
 							: []),
 					]),
 				),

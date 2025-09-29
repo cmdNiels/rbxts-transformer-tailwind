@@ -2,7 +2,7 @@
  * Convert hex color string to RGB color object
  */
 
-import RGBColor from "../../types/RGBColor";
+import type RGBColor from "@/types/RGBColor";
 
 /**
  * Convert hex color string to RGB color object
@@ -16,6 +16,6 @@ export default function hexToRgb(hex: string): RGBColor | undefined {
 				r: parseInt(result[1], 16) / 255,
 				g: parseInt(result[2], 16) / 255,
 				b: parseInt(result[3], 16) / 255,
-		  }
+			}
 		: undefined;
 }

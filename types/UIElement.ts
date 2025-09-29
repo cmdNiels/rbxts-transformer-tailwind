@@ -1,4 +1,4 @@
-import RGBColor from "./RGBColor";
+import type RGBColor from "./RGBColor";
 
 export default interface UIElement {
 	type: string;

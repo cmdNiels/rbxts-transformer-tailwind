@@ -1,4 +1,4 @@
-import { ClassMapping } from "../../types";
+import type { ClassMapping } from "@/types";
 
 export default {
 	flex: { _uiElement: "listLayout", direction: "Horizontal" },
