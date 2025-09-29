@@ -18,21 +18,29 @@ import UIElement from "../types/UIElement";
  * @returns TypeScript transformer factory
  */
 export default function tailwindTransformer(config?: TailwindTransformerConfig): ts.TransformerFactory<ts.SourceFile> {
+	console.log("🚀 Running Tailwind transformer");
+
 	return (context: ts.TransformationContext) => {
 		const { factory } = context;
 
 		// Load Tailwind config and create class map
 		const projectRoot = process.cwd();
-		const tailwindConfig = loadTailwindConfig(projectRoot, config?.tailwindConfigPath);
-		const dynamicClassMap = createClassMap(tailwindConfig);
+		console.log("📁 Project root:", projectRoot);
 
-		console.log("🎨 Local transformer loaded! Classes:", Object.keys(dynamicClassMap).length);
+		const tailwindConfig = loadTailwindConfig(projectRoot, config?.tailwindConfigPath);
+		if (tailwindConfig?.theme) {
+			console.log("⚙️  Tailwind config loaded successfully");
+		}
+
+		const dynamicClassMap = createClassMap(tailwindConfig);
+		console.log("🎨 Class map created with", Object.keys(dynamicClassMap).length, "classes");
 
 		return (sourceFile: ts.SourceFile): ts.SourceFile => {
 			// Only process .tsx and .jsx files
 			if (!sourceFile.fileName.endsWith(".tsx") && !sourceFile.fileName.endsWith(".jsx")) {
 				return sourceFile;
 			}
+
 			function visitor(node: ts.Node): ts.Node {
 				if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
 					const attributes = ts.isJsxElement(node) ? node.openingElement.attributes : node.attributes;
@@ -40,7 +48,6 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 					let classNameAttr: ts.JsxAttribute | undefined;
 					const otherAttributes: ts.JsxAttributeLike[] = [];
 
-					// Find className attribute and separate other attributes
 					for (const attr of attributes.properties) {
 						if (ts.isJsxAttribute(attr) && ts.isIdentifier(attr.name) && attr.name.text === "className") {
 							classNameAttr = attr;
@@ -49,33 +56,27 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 						}
 					}
 
-					// If we found a className attribute, process it and transform the element
 					if (classNameAttr && classNameAttr.initializer) {
 						let classNames: string = "";
 
 						if (ts.isStringLiteral(classNameAttr.initializer)) {
-							// Handle direct string literal: className="w-4 h-4"
 							classNames = classNameAttr.initializer.text;
 						} else if (
 							ts.isJsxExpression(classNameAttr.initializer) &&
 							classNameAttr.initializer.expression &&
 							ts.isStringLiteral(classNameAttr.initializer.expression)
 						) {
-							// Handle JSX expression with string literal: className={"w-4 h-4"}
 							classNames = classNameAttr.initializer.expression.text;
 						}
 
-						// Parse classes even if classNames is empty (to ensure className is removed)
 						const { properties, uiElements } = parseClasses(
 							classNames,
 							dynamicClassMap,
 							config?.warnUnknownClasses,
 						);
 
-						// Create new attributes from Tailwind classes (excluding className)
 						const newAttributes: ts.JsxAttributeLike[] = [...otherAttributes];
 
-						// Add properties as attributes
 						for (const key of Object.keys(properties as Record<string, unknown>)) {
 							if (Object.prototype.hasOwnProperty.call(properties, key)) {
 								const value = (properties as Record<string, unknown>)[key];
@@ -91,7 +92,6 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 							}
 						}
 
-						// Create UI element children
 						const uiElementChildren: ts.JsxElement[] = [];
 						for (const element of uiElements) {
 							const uiElement = createUIElement(factory, element as UIElement);
@@ -100,9 +100,7 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 							}
 						}
 
-						// Transform the element based on its type
 						if (ts.isJsxSelfClosingElement(node)) {
-							// Convert self-closing to regular element if we need to add UI children
 							if (uiElementChildren.length > 0) {
 								return ts.visitEachChild(
 									factory.createJsxElement(
@@ -130,7 +128,6 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 								);
 							}
 						} else {
-							// JSX element with children - visit existing children first
 							const visitedChildren = node.children.map(
 								(child) => ts.visitNode(child, visitor) as ts.JsxChild,
 							);
