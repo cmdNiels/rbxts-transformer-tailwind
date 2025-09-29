@@ -20,7 +20,9 @@ export default function parseClasses(
 	const classes = classNames.split(" ").filter((c) => c !== "");
 	const properties: unknown = {};
 	const uiElementsMap: Record<string, Record<string, unknown>> = {};
-	const size: SizeValue = { x: undefined, y: undefined };
+	const size: SizeValue = {};
+	const automaticSizeValues: string[] = [];
+	
 
 	for (const cls of classes) {
 		const mapping = classMapToUse[cls];
@@ -40,6 +42,8 @@ export default function parseClasses(
 				// Handle Size property specially to merge x and y
 				if (mapping.Size.x) size.x = mapping.Size.x;
 				if (mapping.Size.y) size.y = mapping.Size.y;
+			} else if (mapping.AutomaticSize) {
+				automaticSizeValues.push(mapping.AutomaticSize as string);
 			} else {
 				for (const key of Object.keys(mapping)) {
 					if (Object.prototype.hasOwnProperty.call(mapping, key)) {
@@ -61,6 +65,21 @@ export default function parseClasses(
 			x: size.x || { scale: 0, offset: 0 },
 			y: size.y || { scale: 0, offset: 0 },
 		};
+	}
+	
+	if (automaticSizeValues.length > 0) {
+		const hasX = automaticSizeValues.includes("X");
+		const hasY = automaticSizeValues.includes("Y");
+		
+		if (hasX && hasY) {
+			(properties as Record<string, unknown>).AutomaticSize = "XY";
+		} else if (hasY) {
+			(properties as Record<string, unknown>).AutomaticSize = "Y";
+		} else if (hasX) {
+			(properties as Record<string, unknown>).AutomaticSize = "X";
+		} else {
+			(properties as Record<string, unknown>).AutomaticSize = automaticSizeValues[automaticSizeValues.length - 1];
+		}
 	}
 
 	return { properties, uiElements };
