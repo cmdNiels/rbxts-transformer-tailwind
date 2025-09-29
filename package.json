@@ -2,7 +2,7 @@
 	"name": "rbxts-transformer-tailwind",
 	"version": "1.0.0",
 	"description": "A TypeScript transformer that converts Tailwind CSS classes to Roblox UI properties for roblox-ts projects",
-	"main": "out/transformer.js",
+	"main": "out/lib/transformer.js",
 	"types": "react-jsx.d.ts",
 	"files": [
 		"out/**/*",
