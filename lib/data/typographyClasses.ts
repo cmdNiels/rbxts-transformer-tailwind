@@ -19,6 +19,6 @@ export default {
 	// Font weights
 	"font-normal": { Font: "Gotham" },
 	"font-medium": { Font: "GothamMedium" },
-	"font-semibold": { Font: "GothamSemibold" },
+	"font-semibold": { Font: "GothamMedium" },
 	"font-bold": { Font: "GothamBold" },
 } as Record<string, ClassMapping>;
