@@ -6,6 +6,13 @@ import RGBColor from "../../types/RGBColor";
 import SizeValue from "../../types/SizeValue";
 
 /**
+ * Helper function to create boolean expressions
+ */
+function createBooleanExpression(factory: ts.NodeFactory, value: unknown): ts.Expression {
+	return typeof value === "boolean" ? (value ? factory.createTrue() : factory.createFalse()) : factory.createFalse();
+}
+
+/**
  * Create property value expression based on key and value
  * @param factory - TypeScript node factory
  * @param key - Property key name
@@ -14,20 +21,135 @@ import SizeValue from "../../types/SizeValue";
  */
 export default function createPropertyValue(factory: ts.NodeFactory, key: string, value: unknown): ts.Expression {
 	switch (key) {
+		// Color3 properties
 		case "BackgroundColor3":
+			return createColor3Expression(factory, value as RGBColor);
 		case "TextColor3":
 			return createColor3Expression(factory, value as RGBColor);
+		case "ImageColor3":
+			return createColor3Expression(factory, value as RGBColor);
+		case "PlaceholderColor3":
+			return createColor3Expression(factory, value as RGBColor);
+		case "BorderColor3":
+			return createColor3Expression(factory, value as RGBColor);
+		case "TextStrokeColor3":
+			return createColor3Expression(factory, value as RGBColor);
+		case "SelectionImageColor3":
+			return createColor3Expression(factory, value as RGBColor);
+
+		// UDim2 properties
 		case "Size":
 			return createUDim2Expression(factory, value as SizeValue)!;
+		case "Position":
+			return createUDim2Expression(factory, value as SizeValue)!;
+
+		// Text alignment enums
 		case "TextXAlignment":
 			return createEnumExpression(factory, "TextXAlignment", value as string);
+		case "TextYAlignment":
+			return createEnumExpression(factory, "TextYAlignment", value as string);
+
+		// Font properties
 		case "Font":
 			return createEnumExpression(factory, "Font", value as string);
+		case "FontFace":
+			// FontFace requires special handling - create Font.new() expression
+			if (typeof value === "string") {
+				return factory.createCallExpression(
+					factory.createPropertyAccessExpression(
+						factory.createIdentifier("Font"),
+						factory.createIdentifier("new"),
+					),
+					undefined,
+					[factory.createStringLiteral(value)],
+				);
+			}
+			return factory.createStringLiteral(String(value));
+
+		// Size constraint enums
+		case "SizeConstraint":
+			return createEnumExpression(factory, "SizeConstraint", value as string);
+
+		// Automatic size enums
+		case "AutomaticSize":
+			return createEnumExpression(factory, "AutomaticSize", value as string);
+
+		// Layout enums
+		case "FillDirection":
+			return createEnumExpression(factory, "FillDirection", value as string);
+		case "HorizontalAlignment":
+			return createEnumExpression(factory, "HorizontalAlignment", value as string);
+		case "VerticalAlignment":
+			return createEnumExpression(factory, "VerticalAlignment", value as string);
+		case "SortOrder":
+			return createEnumExpression(factory, "SortOrder", value as string);
+
+		// Scrolling properties
+		case "ScrollBarThickness":
+			return factory.createNumericLiteral(value as number);
+		case "CanvasSize":
+			return createUDim2Expression(factory, value as SizeValue)!;
+		case "ScrollingDirection":
+			return createEnumExpression(factory, "ScrollingDirection", value as string);
+		case "ElasticBehavior":
+			return createEnumExpression(factory, "ElasticBehavior", value as string);
+		case "ScrollBarImageColor3":
+			return createColor3Expression(factory, value as RGBColor);
+
+		// Image properties
+		case "ScaleType":
+			return createEnumExpression(factory, "ScaleType", value as string);
+		case "ResampleMode":
+			return createEnumExpression(factory, "ResampleMode", value as string);
+		case "ImageRectOffset":
+			return createUDim2Expression(factory, value as SizeValue)!;
+		case "ImageRectSize":
+			return createUDim2Expression(factory, value as SizeValue)!;
+
+		// Text properties
+		case "TextTruncate":
+			return createEnumExpression(factory, "TextTruncate", value as string);
+		case "RichText":
+			return createBooleanExpression(factory, value);
+		case "TextScaled":
+			return createBooleanExpression(factory, value);
+		case "TextWrapped":
+			return createBooleanExpression(factory, value);
+		case "ClipsDescendants":
+			return createBooleanExpression(factory, value);
+		case "Visible":
+			return createBooleanExpression(factory, value);
+		case "Active":
+			return createBooleanExpression(factory, value);
+		case "Selectable":
+			return createBooleanExpression(factory, value);
+
+		// Numeric properties with special handling
+		case "TextSize":
+			return factory.createNumericLiteral(value as number);
+		case "TextStrokeTransparency":
+			return factory.createNumericLiteral(value as number);
+		case "BackgroundTransparency":
+			return factory.createNumericLiteral(value as number);
+		case "ImageTransparency":
+			return factory.createNumericLiteral(value as number);
+		case "Transparency":
+			return factory.createNumericLiteral(value as number);
+		case "BorderSizePixel":
+			return factory.createNumericLiteral(value as number);
+		case "ZIndex":
+			return factory.createNumericLiteral(value as number);
+		case "LayoutOrder":
+			return factory.createNumericLiteral(value as number);
+
+		// Default case for primitive values
 		default:
 			if (typeof value === "string") {
 				return factory.createStringLiteral(value);
 			} else if (typeof value === "number") {
 				return factory.createNumericLiteral(value);
+			} else if (typeof value === "boolean") {
+				return value ? factory.createTrue() : factory.createFalse();
 			} else if (value != null) {
 				return factory.createStringLiteral(String(value));
 			} else {
