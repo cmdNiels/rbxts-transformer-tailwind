@@ -51,7 +51,6 @@ export default function createClassMap(
 					baseMap[`placeholder-${colorName}`] = { PlaceholderColor3: rgb };
 					baseMap[`border-${colorName}`] = {
 						_uiElement: "stroke",
-						thickness: 1,
 						color: rgb,
 					};
 				}

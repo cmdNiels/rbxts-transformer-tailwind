@@ -14,7 +14,6 @@ export default function generateBorderColorClasses(includeColors?: string[]): Re
 			const className = `border-${colorName}`;
 			classes[className] = {
 				_uiElement: "stroke",
-				thickness: 1,
 				color: tailwindColors[colorName],
 			};
 		}

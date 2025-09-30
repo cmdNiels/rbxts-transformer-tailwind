@@ -176,7 +176,7 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 							factory.createIdentifier("Thickness"),
 							factory.createJsxExpression(
 								undefined,
-								factory.createNumericLiteral(element.thickness as number),
+								factory.createNumericLiteral((element.thickness as number) || 1),
 							),
 						),
 						factory.createJsxAttribute(
