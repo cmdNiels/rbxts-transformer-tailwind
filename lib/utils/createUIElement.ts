@@ -155,6 +155,21 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 				);
 			}
 
+			if (element.flexAlignment) {
+				const isHorizontal = element.direction === "Horizontal";
+				const flexProperty = isHorizontal ? "HorizontalFlex" : "VerticalFlex";
+
+				attributes.push(
+					factory.createJsxAttribute(
+						factory.createIdentifier(flexProperty),
+						factory.createJsxExpression(
+							undefined,
+							createEnumExpression(factory, "UIFlexAlignment", element.flexAlignment),
+						),
+					),
+				);
+			}
+
 			if (element.wraps !== undefined) {
 				attributes.push(
 					factory.createJsxAttribute(

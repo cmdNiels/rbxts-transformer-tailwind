@@ -15,6 +15,7 @@ export default interface UIElement {
 	horizontalAlignment?: string;
 	verticalAlignment?: string;
 	wraps?: boolean;
+	flexAlignment?: string;
 	thickness?: number;
 	color?: RGBColor;
 	transparency?: number;

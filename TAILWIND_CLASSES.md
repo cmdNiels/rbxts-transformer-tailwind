@@ -173,14 +173,15 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `flex-wrap`
 🚧 | `flex-wrap-reverse`
 ✅ | `flex-nowrap`
-🚧 | `justify-between`
-🚧 | `justify-around`
-🚧 | `justify-evenly`
+✅ | `justify-between`
+✅ | `justify-around`
+✅ | `justify-evenly`
 🚧 | `items-baseline`
 🚧 | `items-stretch`
 
 ### Gap
 ✅ | `gap-0`
+❌ | `gap-px`
 ✅ | `gap-0.5`
 ✅ | `gap-1`
 ✅ | `gap-1.5`
