@@ -147,7 +147,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `items-center`
 ✅ | `items-start`
 ✅ | `items-end`
-🚧 | `block`
+❌ | `block`
 ❌ | `inline-block`
 ❌ | `inline`
 ❌ | `inline-flex`
@@ -162,12 +162,12 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ❌ | `table-row-group`
 ❌ | `table-row`
 ❌ | `flow-root`
-🚧 | `grid`
+❌ | `grid`
 ❌ | `inline-grid`
 ❌ | `contents`
 ❌ | `list-item`
 🚧 | `hidden`
-🚧 | `flex-row`
+✅ | `flex-row`
 🚧 | `flex-row-reverse`
 🚧 | `flex-col-reverse`
 🚧 | `flex-wrap`

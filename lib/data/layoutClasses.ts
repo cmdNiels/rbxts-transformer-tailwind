@@ -3,6 +3,7 @@ import type { ClassMapping } from "../../types";
 export default {
 	flex: { _uiElement: "listLayout", direction: "Horizontal" },
 	"flex-col": { _uiElement: "listLayout", direction: "Vertical" },
+	"flex-row": { _uiElement: "listLayout", direction: "Horizontal" },
 	"justify-center": { _uiElement: "listLayout", horizontalAlignment: "Center" },
 	"justify-start": { _uiElement: "listLayout", horizontalAlignment: "Left" },
 	"justify-end": { _uiElement: "listLayout", horizontalAlignment: "Right" },
