@@ -480,47 +480,44 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ## Borders
 
 ### Border Radius
+🚧 | `rounded-none`
 ✅ | `rounded`
 ✅ | `rounded-sm`
 ✅ | `rounded-md`
 ✅ | `rounded-lg`
 ✅ | `rounded-xl`
 ✅ | `rounded-2xl`
-✅ | `rounded-full`
-🚧 | `rounded-none`
 🚧 | `rounded-3xl`
-🚧 | `rounded-t`
-🚧 | `rounded-r`
-🚧 | `rounded-b`
-🚧 | `rounded-l`
-🚧 | `rounded-tl`
-🚧 | `rounded-tr`
-🚧 | `rounded-br`
-🚧 | `rounded-bl`
+🚧 | `rounded-4xl`
+✅ | `rounded-full`
+❌ | `rounded-t-*`
+❌ | `rounded-r-*`
+❌ | `rounded-b-*`
+❌ | `rounded-l-*`
+❌ | `rounded-tl-*`
+❌ | `rounded-tr-*`
+❌ | `rounded-br-*`
+❌ | `rounded-bl-*`
 
 ### Border Width
+🚧 | `border-0`
 ✅ | `border`
 ✅ | `border-2`
 ✅ | `border-4`
 ✅ | `border-8`
-🚧 | `border-0`
-🚧 | `border-t`
-🚧 | `border-r`
-🚧 | `border-b`
-🚧 | `border-l`
-🚧 | `border-t-0`
-🚧 | `border-r-0`
-🚧 | `border-b-0`
-🚧 | `border-l-0`
+❌ | `border-t-*`
+❌ | `border-r-*`
+❌ | `border-b-*`
+❌ | `border-l-*`
+❌ | `border-t-*`
+❌ | `border-r-*`
+❌ | `border-b-*`
+❌ | `border-l-*`
 
 ### Border Color
 ✅ | `border-white`  
 ✅ | `border-black`  
 🚧 | `border-transparent`
-❌ | `border-current`
-❌ | `border-inherit`
-
-#### All Color Families
 ✅ | `border-slate-*`
 ✅ | `border-gray-*`
 ✅ | `border-zinc-*`
@@ -543,6 +540,8 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `border-fuchsia-*`
 ✅ | `border-pink-*`
 ✅ | `border-rose-*`
+❌ | `border-current`
+❌ | `border-inherit`
 
 ### Border Style
 ❌ | `border-solid`
