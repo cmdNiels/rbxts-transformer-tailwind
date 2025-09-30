@@ -5,9 +5,9 @@ export default {
 	"text-left": { TextXAlignment: "Left" },
 	"text-center": { TextXAlignment: "Center" },
 	"text-right": { TextXAlignment: "Right" },
-	"text-start": { TextYAlignment: "Left" },
+	"text-start": { TextYAlignment: "Top" },
 	"text-justify": { TextYAlignment: "Center" },
-	"text-end": { TextYAlignment: "Right" },
+	"text-end": { TextYAlignment: "Bottom" },
 
 	// Text sizes
 	"text-xs": { TextSize: 10 },
@@ -45,4 +45,10 @@ export default {
 	overline: { _textDecoration: "overline", RichText: true },
 	"line-through": { _textDecoration: "line-through", RichText: true },
 	"no-underline": { _textDecoration: "none", RichText: true },
+
+	// Text transform (requires special handling in transformer)
+	uppercase: { _textTransform: "uppercase" },
+	lowercase: { _textTransform: "lowercase" },
+	capitalize: { _textTransform: "capitalize" },
+	"normal-case": { _textTransform: "none" },
 } as Record<string, ClassMapping>;

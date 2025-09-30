@@ -12,8 +12,7 @@ import createPropertyValue from "./utils/createPropertyValue";
 import createUIElement from "./utils/createUIElement";
 import loadTailwindConfig from "./utils/loadTailwindConfig";
 import parseClasses from "./utils/parseClasses";
-import processChildrenWithTextDecoration from "./utils/processChildrenWithTextDecoration";
-import wrapTextWithDecoration from "./utils/wrapTextWithDecoration";
+import processText from "./utils/processText";
 
 /**
  * Creates a Tailwind CSS transformer for roblox-ts
@@ -90,6 +89,7 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 						// Handle font properties separately to combine FontWeight and FontFamily into FontFace
 						const props = properties as Record<string, unknown>;
 						const textDecoration = props._textDecoration as string;
+						const textTransform = props._textTransform as string;
 						const fontWeight = props.FontWeight as string;
 						const fontFamily = props.FontFamily as string;
 						const fontStyle = props.FontStyle as string;
@@ -134,11 +134,17 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 							);
 						}
 
-						// Process other properties (excluding font properties and text decoration that are handled specially)
+						// Process other properties (excluding font properties, text decoration, and text transform that are handled specially)
 						for (const key of Object.keys(props)) {
 							if (
 								Object.prototype.hasOwnProperty.call(props, key) &&
-								!["FontWeight", "FontFamily", "FontStyle", "_textDecoration"].includes(key)
+								![
+									"FontWeight",
+									"FontFamily",
+									"FontStyle",
+									"_textDecoration",
+									"_textTransform",
+								].includes(key)
 							) {
 								const value = props[key];
 								newAttributes.push(
@@ -153,8 +159,8 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 							}
 						}
 
-						// Handle Text prop with text decoration
-						if (textAttr && textDecoration && textAttr.initializer) {
+						// Handle Text prop with text decoration and/or text transform
+						if (textAttr && (textDecoration || textTransform) && textAttr.initializer) {
 							let textValue: string = "";
 
 							if (ts.isStringLiteral(textAttr.initializer)) {
@@ -168,13 +174,14 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 							}
 
 							if (textValue) {
-								const wrappedText = wrapTextWithDecoration(textValue, textDecoration);
+								const processedText = processText(textValue, textTransform, textDecoration);
+
 								newAttributes.push(
 									factory.createJsxAttribute(
 										factory.createIdentifier("Text"),
 										factory.createJsxExpression(
 											undefined,
-											factory.createStringLiteral(wrappedText),
+											factory.createStringLiteral(processedText),
 										),
 									),
 								);
@@ -183,7 +190,7 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 								newAttributes.push(textAttr);
 							}
 						} else if (textAttr) {
-							// No text decoration, keep original Text attr
+							// No text decoration or transform, keep original Text attr
 							newAttributes.push(textAttr);
 						}
 
@@ -227,10 +234,35 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 								(child) => ts.visitNode(child, visitor) as ts.JsxChild,
 							);
 
-							// Apply text decoration if present
-							const processedChildren = textDecoration
-								? processChildrenWithTextDecoration(visitedChildren, textDecoration, factory)
-								: visitedChildren;
+							// Apply text transformations if present
+							const processedChildren =
+								textDecoration || textTransform
+									? visitedChildren.map((child) => {
+											if (ts.isJsxText(child)) {
+												const processedText = processText(
+													child.text,
+													textTransform,
+													textDecoration,
+												);
+												return factory.createJsxText(processedText);
+											} else if (
+												ts.isJsxExpression(child) &&
+												child.expression &&
+												ts.isStringLiteral(child.expression)
+											) {
+												const processedText = processText(
+													child.expression.text,
+													textTransform,
+													textDecoration,
+												);
+												return factory.createJsxExpression(
+													undefined,
+													factory.createStringLiteral(processedText),
+												);
+											}
+											return child;
+										})
+									: visitedChildren;
 
 							const newChildren: ts.JsxChild[] = [...uiElementChildren, ...processedChildren];
 

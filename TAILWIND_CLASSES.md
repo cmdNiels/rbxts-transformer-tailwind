@@ -475,10 +475,10 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `no-underline`
 
 ### Text Transform
-🚧 | `uppercase`
-🚧 | `lowercase`
-🚧 | `capitalize`
-🚧 | `normal-case`
+✅ | `uppercase`
+✅ | `lowercase`
+✅ | `capitalize`
+✅ | `normal-case`
 
 ### Text Overflow
 🚧 | `truncate`
