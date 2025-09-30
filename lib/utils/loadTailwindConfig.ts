@@ -5,7 +5,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import type TailwindConfig from "@/types/TailwindConfig";
+import type TailwindConfig from "../../types/TailwindConfig";
 
 /**
  * Load Tailwind configuration from project directory

@@ -1,5 +1,5 @@
-import generateImageColorClasses from "@/lib/utils/colors/generateImageColorClasses";
-import type { ClassMapping } from "@/types";
+import type { ClassMapping } from "../../types";
+import generateImageColorClasses from "../utils/colors/generateImageColorClasses";
 
 export default {
 	...generateImageColorClasses(),

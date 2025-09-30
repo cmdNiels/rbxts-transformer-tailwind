@@ -1,5 +1,5 @@
-import generateBackgroundColorClasses from "@/lib/utils/colors/generateBackgroundColorClasses";
-import type { ClassMapping } from "@/types";
+import type { ClassMapping } from "../../types";
+import generateBackgroundColorClasses from "../utils/colors/generateBackgroundColorClasses";
 
 export default {
 	"bg-transparent": { BackgroundTransparency: 1 },

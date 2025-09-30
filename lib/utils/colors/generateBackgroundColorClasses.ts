@@ -1,5 +1,5 @@
-import { tailwindColors } from "@/lib/data/tailwindColors";
-import type { ClassMapping } from "@/types";
+import type { ClassMapping } from "../../../types";
+import { tailwindColors } from "../../data/tailwindColors";
 
 /**
  * Generates Tailwind color classes for a specific property

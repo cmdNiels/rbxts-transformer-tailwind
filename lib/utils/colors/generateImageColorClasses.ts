@@ -1,5 +1,5 @@
-import { tailwindColors } from "@/lib/data/tailwindColors";
-import type { ClassMapping } from "@/types";
+import type { ClassMapping } from "../../../types";
+import { tailwindColors } from "../../data/tailwindColors";
 
 /**
  * Generates image color classes for ImageLabel and ImageButton elements

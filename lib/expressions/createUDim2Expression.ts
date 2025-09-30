@@ -4,7 +4,7 @@
 
 import type * as ts from "typescript";
 
-import type SizeValue from "@/types/SizeValue";
+import type SizeValue from "../../types/SizeValue";
 
 /**
  * Create UDim2 constructor expression

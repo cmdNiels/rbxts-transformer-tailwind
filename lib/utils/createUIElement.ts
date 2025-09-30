@@ -4,10 +4,10 @@
 
 import type * as ts from "typescript";
 
-import createColor3Expression from "@/lib/expressions/createColor3Expression";
-import createEnumExpression from "@/lib/expressions/createEnumExpression";
-import type RGBColor from "@/types/RGBColor";
-import type UIElement from "@/types/UIElement";
+import type RGBColor from "../../types/RGBColor";
+import type UIElement from "../../types/UIElement";
+import createColor3Expression from "../expressions/createColor3Expression";
+import createEnumExpression from "../expressions/createEnumExpression";
 
 /**
  * Create JSX element for UI components

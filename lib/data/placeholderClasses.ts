@@ -1,5 +1,5 @@
-import generatePlaceholderColorClasses from "@/lib/utils/colors/generatePlaceholderColorClasses";
-import type { ClassMapping } from "@/types";
+import type { ClassMapping } from "../../types";
+import generatePlaceholderColorClasses from "../utils/colors/generatePlaceholderColorClasses";
 
 export default {
 	...generatePlaceholderColorClasses(),

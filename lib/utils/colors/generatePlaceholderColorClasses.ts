@@ -1,5 +1,5 @@
-import { tailwindColors } from "@/lib/data/tailwindColors";
-import type { ClassMapping } from "@/types";
+import type { ClassMapping } from "../../../types";
+import { tailwindColors } from "../../data/tailwindColors";
 
 /**
  * Generates placeholder color classes for TextBox elements

@@ -5,9 +5,8 @@
 
 import * as ts from "typescript";
 
-import type TailwindTransformerConfig from "@/types/TailwindTransformerConfig";
-import type UIElement from "@/types/UIElement";
-
+import type TailwindTransformerConfig from "../types/TailwindTransformerConfig";
+import type UIElement from "../types/UIElement";
 import createClassMap from "./utils/createClassMap";
 import createPropertyValue from "./utils/createPropertyValue";
 import createUIElement from "./utils/createUIElement";

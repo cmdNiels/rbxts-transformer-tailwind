@@ -1,5 +1,5 @@
-import generateTextColorClasses from "@/lib/utils/colors/generateTextColorClasses";
-import type { ClassMapping } from "@/types";
+import type { ClassMapping } from "../../types";
+import generateTextColorClasses from "../utils/colors/generateTextColorClasses";
 
 export default {
 	...generateTextColorClasses(),
