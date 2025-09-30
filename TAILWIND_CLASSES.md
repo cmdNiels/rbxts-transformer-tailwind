@@ -464,9 +464,9 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `text-left`
 ✅ | `text-center`
 ✅ | `text-right`
-🚧 | `text-justify`
-🚧 | `text-start`
-🚧 | `text-end`
+✅ | `text-start`
+✅ | `text-justify`
+✅ | `text-end`
 
 ### Text Decoration
 🚧 | `underline`

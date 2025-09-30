@@ -5,6 +5,9 @@ export default {
 	"text-left": { TextXAlignment: "Left" },
 	"text-center": { TextXAlignment: "Center" },
 	"text-right": { TextXAlignment: "Right" },
+	"text-start": { TextYAlignment: "Left" },
+	"text-justify": { TextYAlignment: "Center" },
+	"text-end": { TextYAlignment: "Right" },
 
 	// Text sizes
 	"text-xs": { TextSize: 10 },
