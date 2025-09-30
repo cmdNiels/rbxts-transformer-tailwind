@@ -545,24 +545,24 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `border-rose-*`
 
 ### Border Style
-🚧 | `border-solid`
-🚧 | `border-dashed`
-🚧 | `border-dotted`
-🚧 | `border-double`
-🚧 | `border-hidden`
-🚧 | `border-none`
+❌ | `border-solid`
+❌ | `border-dashed`
+❌ | `border-dotted`
+❌ | `border-double`
+❌ | `border-hidden`
+❌ | `border-none`
 
 ## Effects
 
 ### Box Shadow
-🚧 | `shadow`
-🚧 | `shadow-lg`
-🚧 | `shadow-none`
-🚧 | `shadow-sm`
-🚧 | `shadow-md`
-🚧 | `shadow-xl`
-🚧 | `shadow-2xl`
-🚧 | `shadow-inner`
+❌ | `shadow`
+❌ | `shadow-lg`
+❌ | `shadow-none`
+❌ | `shadow-sm`
+❌ | `shadow-md`
+❌ | `shadow-xl`
+❌ | `shadow-2xl`
+❌ | `shadow-inner`
 
 ### Opacity
 🚧 | `opacity-0`
