@@ -13,6 +13,18 @@ import type RGBColor from "../../types/RGBColor";
  * @returns TypeScript expression for Color3.fromRGB call
  */
 export default function createColor3Expression(factory: ts.NodeFactory, color: RGBColor): ts.Expression {
+	if (!color || typeof color.r !== "number" || typeof color.g !== "number" || typeof color.b !== "number") {
+		// Fallback to white color if color is undefined or invalid
+		return factory.createCallExpression(
+			factory.createPropertyAccessExpression(
+				factory.createIdentifier("Color3"),
+				factory.createIdentifier("fromRGB"),
+			),
+			undefined,
+			[factory.createNumericLiteral(255), factory.createNumericLiteral(255), factory.createNumericLiteral(255)],
+		);
+	}
+
 	return factory.createCallExpression(
 		factory.createPropertyAccessExpression(factory.createIdentifier("Color3"), factory.createIdentifier("fromRGB")),
 		undefined,
