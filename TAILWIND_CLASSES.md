@@ -262,47 +262,47 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `pl-*`
 
 ### Margin
-🚧 | `m-0`
+❌ | `m-0`
 ❌ | `m-px`
-🚧 | `m-0.5`
-🚧 | `m-1`
-🚧 | `m-1.5`
-🚧 | `m-2`
-🚧 | `m-2.5`
-🚧 | `m-3`
-🚧 | `m-3.5`
-🚧 | `m-4`
-🚧 | `m-5`
-🚧 | `m-6`
-🚧 | `m-7`
-🚧 | `m-8`
-🚧 | `m-9`
-🚧 | `m-10`
-🚧 | `m-11`
-🚧 | `m-12`
-🚧 | `m-14`
-🚧 | `m-16`
-🚧 | `m-20`
-🚧 | `m-24`
-🚧 | `m-28`
-🚧 | `m-32`
-🚧 | `m-36`
-🚧 | `m-40`
-🚧 | `m-44`
-🚧 | `m-48`
-🚧 | `m-52`
-🚧 | `m-56`
-🚧 | `m-60`
-🚧 | `m-64`
-🚧 | `m-72`
-🚧 | `m-80`
-🚧 | `m-96`
-🚧 | `mx-*`
-🚧 | `my-*`
-🚧 | `mt-*`
-🚧 | `mr-*`
-🚧 | `mb-*`
-🚧 | `ml-*`
+❌ | `m-0.5`
+❌ | `m-1`
+❌ | `m-1.5`
+❌ | `m-2`
+❌ | `m-2.5`
+❌ | `m-3`
+❌ | `m-3.5`
+❌ | `m-4`
+❌ | `m-5`
+❌ | `m-6`
+❌ | `m-7`
+❌ | `m-8`
+❌ | `m-9`
+❌ | `m-10`
+❌ | `m-11`
+❌ | `m-12`
+❌ | `m-14`
+❌ | `m-16`
+❌ | `m-20`
+❌ | `m-24`
+❌ | `m-28`
+❌ | `m-32`
+❌ | `m-36`
+❌ | `m-40`
+❌ | `m-44`
+❌ | `m-48`
+❌ | `m-52`
+❌ | `m-56`
+❌ | `m-60`
+❌ | `m-64`
+❌ | `m-72`
+❌ | `m-80`
+❌ | `m-96`
+❌ | `mx-*`
+❌ | `my-*`
+❌ | `mt-*`
+❌ | `mr-*`
+❌ | `mb-*`
+❌ | `ml-*`
 
 ## Colors
 
@@ -486,12 +486,12 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 🚧 | `text-clip`
 
 ### Whitespace
-🚧 | `whitespace-normal`
-🚧 | `whitespace-nowrap`
-🚧 | `whitespace-pre`
-🚧 | `whitespace-pre-line`
-🚧 | `whitespace-pre-wrap`
-🚧 | `whitespace-break-spaces`
+❌ | `whitespace-normal`
+❌ | `whitespace-nowrap`
+❌ | `whitespace-pre`
+❌ | `whitespace-pre-line`
+❌ | `whitespace-pre-wrap`
+❌ | `whitespace-break-spaces`
 
 ## Borders
 
@@ -908,9 +908,6 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ## Dark Mode
 ❌ | `dark:`
 
-## Print
-❌ | `print:`
-
 ## RTL Support
 ❌ | `rtl:`
 ❌ | `ltr:`
@@ -918,11 +915,3 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ## Motion
 ❌ | `motion-safe:`
 ❌ | `motion-reduce:`
-
----
-
-**Legend:**
-- ✅ = Supported and implemented
-- ❌ = Not supported/implemented
-
-**Note:** Custom classes defined in your Tailwind config (using `theme.extend.colors`) are automatically supported for background and text colors.
