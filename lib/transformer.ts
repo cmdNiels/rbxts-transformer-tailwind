@@ -12,6 +12,8 @@ import createPropertyValue from "./utils/createPropertyValue";
 import createUIElement from "./utils/createUIElement";
 import loadTailwindConfig from "./utils/loadTailwindConfig";
 import parseClasses from "./utils/parseClasses";
+import processChildrenWithTextDecoration from "./utils/processChildrenWithTextDecoration";
+import wrapTextWithDecoration from "./utils/wrapTextWithDecoration";
 
 /**
  * Creates a Tailwind CSS transformer for roblox-ts
@@ -47,11 +49,18 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 					const attributes = ts.isJsxElement(node) ? node.openingElement.attributes : node.attributes;
 
 					let classNameAttr: ts.JsxAttribute | undefined;
+					let textAttr: ts.JsxAttribute | undefined;
 					const otherAttributes: ts.JsxAttributeLike[] = [];
 
 					for (const attr of attributes.properties) {
-						if (ts.isJsxAttribute(attr) && ts.isIdentifier(attr.name) && attr.name.text === "className") {
-							classNameAttr = attr;
+						if (ts.isJsxAttribute(attr) && ts.isIdentifier(attr.name)) {
+							if (attr.name.text === "className") {
+								classNameAttr = attr;
+							} else if (attr.name.text === "Text") {
+								textAttr = attr;
+							} else {
+								otherAttributes.push(attr);
+							}
 						} else {
 							otherAttributes.push(attr);
 						}
@@ -80,6 +89,7 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 
 						// Handle font properties separately to combine FontWeight and FontFamily into FontFace
 						const props = properties as Record<string, unknown>;
+						const textDecoration = props._textDecoration as string;
 						const fontWeight = props.FontWeight as string;
 						const fontFamily = props.FontFamily as string;
 						const fontStyle = props.FontStyle as string;
@@ -124,11 +134,11 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 							);
 						}
 
-						// Process other properties (excluding font properties that are now handled above)
+						// Process other properties (excluding font properties and text decoration that are handled specially)
 						for (const key of Object.keys(props)) {
 							if (
 								Object.prototype.hasOwnProperty.call(props, key) &&
-								!["FontWeight", "FontFamily", "FontStyle"].includes(key)
+								!["FontWeight", "FontFamily", "FontStyle", "_textDecoration"].includes(key)
 							) {
 								const value = props[key];
 								newAttributes.push(
@@ -141,6 +151,40 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 									),
 								);
 							}
+						}
+
+						// Handle Text prop with text decoration
+						if (textAttr && textDecoration && textAttr.initializer) {
+							let textValue: string = "";
+
+							if (ts.isStringLiteral(textAttr.initializer)) {
+								textValue = textAttr.initializer.text;
+							} else if (
+								ts.isJsxExpression(textAttr.initializer) &&
+								textAttr.initializer.expression &&
+								ts.isStringLiteral(textAttr.initializer.expression)
+							) {
+								textValue = textAttr.initializer.expression.text;
+							}
+
+							if (textValue) {
+								const wrappedText = wrapTextWithDecoration(textValue, textDecoration);
+								newAttributes.push(
+									factory.createJsxAttribute(
+										factory.createIdentifier("Text"),
+										factory.createJsxExpression(
+											undefined,
+											factory.createStringLiteral(wrappedText),
+										),
+									),
+								);
+							} else {
+								// If we can't extract the text value, keep the original Text attr
+								newAttributes.push(textAttr);
+							}
+						} else if (textAttr) {
+							// No text decoration, keep original Text attr
+							newAttributes.push(textAttr);
 						}
 
 						const uiElementChildren: ts.JsxElement[] = [];
@@ -182,7 +226,13 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 							const visitedChildren = node.children.map(
 								(child) => ts.visitNode(child, visitor) as ts.JsxChild,
 							);
-							const newChildren: ts.JsxChild[] = [...uiElementChildren, ...visitedChildren];
+
+							// Apply text decoration if present
+							const processedChildren = textDecoration
+								? processChildrenWithTextDecoration(visitedChildren, textDecoration, factory)
+								: visitedChildren;
+
+							const newChildren: ts.JsxChild[] = [...uiElementChildren, ...processedChildren];
 
 							return factory.createJsxElement(
 								factory.createJsxOpeningElement(

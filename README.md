@@ -49,7 +49,7 @@ Common Tailwind classes are supported including:
 - **Layout**: `w-full`, `h-96`, `flex`, `flex-col`
 - **Colors**: `bg-blue-500`, `text-white`, `bg-gray-100`
 - **Spacing**: `p-4`, `px-6`, `gap-4`
-- **Typography**: `text-xl`, `font-bold`, `text-center`
+- **Typography**: `text-xl`, `font-bold`, `text-center`, `underline`, `line-through`
 - **Borders**: `rounded`, `rounded-lg`, `border`
 
 ## Configuration

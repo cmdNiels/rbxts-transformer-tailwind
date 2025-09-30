@@ -39,4 +39,10 @@ export default {
 	// Font styles
 	italic: { FontStyle: "Italic" },
 	"not-italic": { FontStyle: "Normal" },
+
+	// Text decoration (requires special handling in transformer)
+	underline: { _textDecoration: "underline", RichText: true },
+	overline: { _textDecoration: "overline", RichText: true },
+	"line-through": { _textDecoration: "line-through", RichText: true },
+	"no-underline": { _textDecoration: "none", RichText: true },
 } as Record<string, ClassMapping>;

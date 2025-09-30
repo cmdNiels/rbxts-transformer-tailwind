@@ -469,10 +469,10 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `text-end`
 
 ### Text Decoration
-🚧 | `underline`
-🚧 | `overline`
-🚧 | `line-through`
-🚧 | `no-underline`
+✅ | `underline`
+✅ | `overline`
+✅ | `line-through`
+✅ | `no-underline`
 
 ### Text Transform
 🚧 | `uppercase`
