@@ -53,19 +53,12 @@ export default function createPropertyValue(factory: ts.NodeFactory, key: string
 		// Font properties
 		case "Font":
 			return createEnumExpression(factory, "Font", value as string);
-		case "FontFace":
-			// FontFace requires special handling - create Font.new() expression
-			if (typeof value === "string") {
-				return factory.createCallExpression(
-					factory.createPropertyAccessExpression(
-						factory.createIdentifier("Font"),
-						factory.createIdentifier("new"),
-					),
-					undefined,
-					[factory.createStringLiteral(value)],
-				);
-			}
-			return factory.createStringLiteral(String(value));
+		case "FontWeight":
+			return createEnumExpression(factory, "FontWeight", value as string);
+		case "FontFamily":
+			return factory.createStringLiteral(value as string);
+		case "FontStyle":
+			return createEnumExpression(factory, "FontStyle", value as string);
 
 		// Size constraint enums
 		case "SizeConstraint":

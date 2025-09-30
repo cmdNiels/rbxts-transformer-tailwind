@@ -17,8 +17,23 @@ export default {
 	"text-4xl": { TextSize: 36 },
 
 	// Font weights
-	"font-normal": { Font: "Gotham" },
-	"font-medium": { Font: "GothamMedium" },
-	"font-semibold": { Font: "GothamMedium" },
-	"font-bold": { Font: "GothamBold" },
+	"font-thin": { FontWeight: "Thin" },
+	"font-extralight": { FontWeight: "ExtraLight" },
+	"font-light": { FontWeight: "Light" },
+	"font-normal": { FontWeight: "Regular" },
+	"font-medium": { FontWeight: "Medium" },
+	"font-semibold": { FontWeight: "SemiBold" },
+	"font-bold": { FontWeight: "Bold" },
+	"font-extrabold": { FontWeight: "ExtraBold" },
+	"font-black": { FontWeight: "Heavy" },
+
+	// Font families
+	"font-gotham": { FontFamily: "rbxasset://fonts/families/GothamSSm.json" },
+	"font-arial": { FontFamily: "rbxasset://fonts/families/Arial.json" },
+	"font-roboto": { FontFamily: "rbxasset://fonts/families/Roboto.json" },
+	"font-source-sans": { FontFamily: "rbxasset://fonts/families/SourceSansPro.json" },
+
+	// Font styles
+	italic: { FontStyle: "Italic" },
+	"not-italic": { FontStyle: "Normal" },
 } as Record<string, ClassMapping>;

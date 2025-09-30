@@ -78,9 +78,59 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 
 						const newAttributes: ts.JsxAttributeLike[] = [...otherAttributes];
 
-						for (const key of Object.keys(properties as Record<string, unknown>)) {
-							if (Object.prototype.hasOwnProperty.call(properties, key)) {
-								const value = (properties as Record<string, unknown>)[key];
+						// Handle font properties separately to combine FontWeight and FontFamily into FontFace
+						const props = properties as Record<string, unknown>;
+						const fontWeight = props.FontWeight as string;
+						const fontFamily = props.FontFamily as string;
+						const fontStyle = props.FontStyle as string;
+
+						// If we have font properties, create a FontFace
+						if (fontWeight || fontFamily) {
+							const defaultFamily = "rbxasset://fonts/families/GothamSSm.json";
+							const defaultWeight = "Regular";
+							const defaultStyle = "Normal";
+
+							const finalFamily = fontFamily || defaultFamily;
+							const finalWeight = fontWeight || defaultWeight;
+							const finalStyle = fontStyle || defaultStyle;
+
+							const fontFaceExpression = factory.createNewExpression(
+								factory.createIdentifier("Font"),
+								undefined,
+								[
+									factory.createStringLiteral(finalFamily),
+									factory.createPropertyAccessExpression(
+										factory.createPropertyAccessExpression(
+											factory.createIdentifier("Enum"),
+											factory.createIdentifier("FontWeight"),
+										),
+										factory.createIdentifier(finalWeight),
+									),
+									factory.createPropertyAccessExpression(
+										factory.createPropertyAccessExpression(
+											factory.createIdentifier("Enum"),
+											factory.createIdentifier("FontStyle"),
+										),
+										factory.createIdentifier(finalStyle),
+									),
+								],
+							);
+
+							newAttributes.push(
+								factory.createJsxAttribute(
+									factory.createIdentifier("FontFace"),
+									factory.createJsxExpression(undefined, fontFaceExpression),
+								),
+							);
+						}
+
+						// Process other properties (excluding font properties that are now handled above)
+						for (const key of Object.keys(props)) {
+							if (
+								Object.prototype.hasOwnProperty.call(props, key) &&
+								!["FontWeight", "FontFamily", "FontStyle"].includes(key)
+							) {
+								const value = props[key];
 								newAttributes.push(
 									factory.createJsxAttribute(
 										factory.createIdentifier(key),

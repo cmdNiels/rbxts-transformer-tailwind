@@ -440,15 +440,25 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 🚧 | `text-9xl`
 
 ### Font Weight
+✅ | `font-thin`
+✅ | `font-extralight`
+✅ | `font-light`
 ✅ | `font-normal`
 ✅ | `font-medium`
 ✅ | `font-semibold`
 ✅ | `font-bold`
-🚧 | `font-thin`
-🚧 | `font-extralight`
-🚧 | `font-light`
-🚧 | `font-extrabold`
-🚧 | `font-black`
+✅ | `font-extrabold`
+✅ | `font-black`
+
+### Font Family
+✅ | `font-gotham`
+✅ | `font-arial`
+✅ | `font-roboto`
+✅ | `font-source-sans`
+
+### Font Style
+✅ | `italic`
+✅ | `not-italic`
 
 ### Text Alignment
 ✅ | `text-left`
