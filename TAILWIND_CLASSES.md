@@ -170,9 +170,9 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `flex-row`
 🚧 | `flex-row-reverse`
 🚧 | `flex-col-reverse`
-🚧 | `flex-wrap`
+✅ | `flex-wrap`
 🚧 | `flex-wrap-reverse`
-🚧 | `flex-nowrap`
+✅ | `flex-nowrap`
 🚧 | `justify-between`
 🚧 | `justify-around`
 🚧 | `justify-evenly`

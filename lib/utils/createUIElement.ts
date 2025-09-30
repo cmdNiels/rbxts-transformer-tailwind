@@ -155,6 +155,18 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 				);
 			}
 
+			if (element.wraps !== undefined) {
+				attributes.push(
+					factory.createJsxAttribute(
+						factory.createIdentifier("Wraps"),
+						factory.createJsxExpression(
+							undefined,
+							element.wraps ? factory.createTrue() : factory.createFalse(),
+						),
+					),
+				);
+			}
+
 			return factory.createJsxElement(
 				factory.createJsxOpeningElement(
 					factory.createIdentifier("uilistlayout"),
