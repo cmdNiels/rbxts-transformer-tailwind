@@ -159,6 +159,16 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 							}
 						}
 
+						// Set default BorderSizePixel to 0 if not already set
+						if (!(props as Record<string, unknown>).BorderSizePixel) {
+							newAttributes.push(
+								factory.createJsxAttribute(
+									factory.createIdentifier("BorderSizePixel"),
+									factory.createJsxExpression(undefined, factory.createNumericLiteral(0)),
+								),
+							);
+						}
+
 						// Handle Text prop with text decoration and/or text transform
 						if (textAttr && (textDecoration || textTransform) && textAttr.initializer) {
 							let textValue: string = "";
