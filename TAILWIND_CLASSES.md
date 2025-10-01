@@ -232,7 +232,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `items-start`
 ✅ | `items-end`
 ✅ | `items-center`
-🚧 | `items-baseline`
+❌ | `items-baseline`
 🚧 | `items-stretch`
 
 #### Align Self
