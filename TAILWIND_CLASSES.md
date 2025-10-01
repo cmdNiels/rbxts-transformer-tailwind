@@ -580,21 +580,69 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ❌ | `shadow-inner`
 
 ### Opacity
-🚧 | `opacity-0`
-🚧 | `opacity-5`
-🚧 | `opacity-10`
-🚧 | `opacity-20`
-🚧 | `opacity-25`
-🚧 | `opacity-30`
-🚧 | `opacity-40`
-🚧 | `opacity-50`
-🚧 | `opacity-60`
-🚧 | `opacity-70`
-🚧 | `opacity-75`
-🚧 | `opacity-80`
-🚧 | `opacity-90`
-🚧 | `opacity-95`
-🚧 | `opacity-100`
+❌ | `opacity-0`
+❌ | `opacity-5`
+❌ | `opacity-10`
+❌ | `opacity-20`
+❌ | `opacity-25`
+❌ | `opacity-30`
+❌ | `opacity-40`
+❌ | `opacity-50`
+❌ | `opacity-60`
+❌ | `opacity-70`
+❌ | `opacity-75`
+❌ | `opacity-80`
+❌ | `opacity-90`
+❌ | `opacity-95`
+❌ | `opacity-100`
+
+✅ | `text-opacity-0`
+✅ | `text-opacity-5`
+✅ | `text-opacity-10`
+✅ | `text-opacity-20`
+✅ | `text-opacity-25`
+✅ | `text-opacity-30`
+✅ | `text-opacity-40`
+✅ | `text-opacity-50`
+✅ | `text-opacity-60`
+✅ | `text-opacity-70`
+✅ | `text-opacity-75`
+✅ | `text-opacity-80`
+✅ | `text-opacity-90`
+✅ | `text-opacity-95`
+✅ | `text-opacity-100`
+
+✅ | `bg-opacity-0`
+✅ | `bg-opacity-5`
+✅ | `bg-opacity-10`
+✅ | `bg-opacity-20`
+✅ | `bg-opacity-25`
+✅ | `bg-opacity-30`
+✅ | `bg-opacity-40`
+✅ | `bg-opacity-50`
+✅ | `bg-opacity-60`
+✅ | `bg-opacity-70`
+✅ | `bg-opacity-75`
+✅ | `bg-opacity-80`
+✅ | `bg-opacity-90`
+✅ | `bg-opacity-95`
+✅ | `bg-opacity-100`
+
+✅ | `border-opacity-0`
+✅ | `border-opacity-5`
+✅ | `border-opacity-10`
+✅ | `border-opacity-20`
+✅ | `border-opacity-25`
+✅ | `border-opacity-30`
+✅ | `border-opacity-40`
+✅ | `border-opacity-50`
+✅ | `border-opacity-60`
+✅ | `border-opacity-70`
+✅ | `border-opacity-75`
+✅ | `border-opacity-80`
+✅ | `border-opacity-90`
+✅ | `border-opacity-95`
+✅ | `border-opacity-100`
 
 ## Positioning
 
@@ -641,16 +689,16 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ## Transforms
 
 ### Scale
-❌ | `scale-0`
-❌ | `scale-50`
-❌ | `scale-75`
-❌ | `scale-90`
-❌ | `scale-95`
-❌ | `scale-100`
-❌ | `scale-105`
-❌ | `scale-110`
-❌ | `scale-125`
-❌ | `scale-150`
+🚧 | `scale-0`
+🚧 | `scale-50`
+🚧 | `scale-75`
+🚧 | `scale-90`
+🚧 | `scale-95`
+🚧 | `scale-100`
+🚧 | `scale-105`
+🚧 | `scale-110`
+🚧 | `scale-125`
+🚧 | `scale-150`
 
 ### Rotate
 ❌ | `rotate-0`

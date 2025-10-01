@@ -10,6 +10,7 @@ import gapClasses from "../data/gapClasses";
 import heightClasses from "../data/heightClasses";
 import imageClasses from "../data/imageClasses";
 import layoutClasses from "../data/layoutClasses";
+import opacityClasses from "../data/opacityClasses";
 import paddingClasses from "../data/paddingClasses";
 import placeholderClasses from "../data/placeholderClasses";
 import textClasses from "../data/textClasses";
@@ -37,6 +38,7 @@ export default function createClassMap(
 		...gapClasses,
 		...imageClasses,
 		...placeholderClasses,
+		...opacityClasses,
 	};
 
 	// Extend with Tailwind config if available
