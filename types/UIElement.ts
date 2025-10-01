@@ -1,26 +1,8 @@
-import type RGBColor from "./RGBColor";
+import type UIBorder from "./UIBorder";
+import type UILayout from "./UILayout";
+import type UIPadding from "./UIPadding";
+import type UIVisual from "./UIVisual";
 
-export default interface UIElement {
+export default interface UIElement extends UIPadding, UIBorder, UILayout, UIVisual {
 	type: string;
-	top?: number;
-	bottom?: number;
-	left?: number;
-	right?: number;
-	vertical?: number;
-	horizontal?: number;
-	all?: number;
-	radius?: number;
-	direction?: string;
-	spacing?: number;
-	horizontalAlignment?: string;
-	verticalAlignment?: string;
-	wraps?: boolean;
-	flexAlignment?: string;
-	thickness?: number;
-	color?: RGBColor;
-	transparency?: number;
-	flexMode?: string;
-	growRatio?: number;
-	shrinkRatio?: number;
-	scale?: number;
 }

@@ -18,13 +18,10 @@ import createEnumExpression from "../expressions/createEnumExpression";
 export default function createUIElement(factory: ts.NodeFactory, element: UIElement): ts.JsxElement | undefined {
 	switch (element.type) {
 		case "padding": {
-			const paddingTop = (element.top as number) || (element.vertical as number) || (element.all as number) || 0;
-			const paddingBottom =
-				(element.bottom as number) || (element.vertical as number) || (element.all as number) || 0;
-			const paddingLeft =
-				(element.left as number) || (element.horizontal as number) || (element.all as number) || 0;
-			const paddingRight =
-				(element.right as number) || (element.horizontal as number) || (element.all as number) || 0;
+			const paddingTop = (element.top as number) || 0;
+			const paddingBottom = (element.bottom as number) || 0;
+			const paddingLeft = (element.left as number) || 0;
+			const paddingRight = (element.right as number) || 0;
 
 			return factory.createJsxElement(
 				factory.createJsxOpeningElement(
