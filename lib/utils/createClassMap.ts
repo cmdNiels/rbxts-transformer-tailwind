@@ -11,6 +11,7 @@ import heightClasses from "../data/heightClasses";
 import imageClasses from "../data/imageClasses";
 import layoutClasses from "../data/layoutClasses";
 import opacityClasses from "../data/opacityClasses";
+import orderClasses from "../data/orderClasses";
 import paddingClasses from "../data/paddingClasses";
 import placeholderClasses from "../data/placeholderClasses";
 import textClasses from "../data/textClasses";
@@ -38,8 +39,9 @@ export default function createClassMap(
 		...layoutClasses,
 		...gapClasses,
 		...imageClasses,
-		...placeholderClasses,
 		...opacityClasses,
+		...orderClasses,
+		...placeholderClasses,
 		...zIndexClasses,
 	};
 

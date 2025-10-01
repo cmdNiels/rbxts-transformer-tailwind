@@ -139,18 +139,14 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `h-fit`
 
 ### Flexbox & Grid
+
+#### Display
 ✅ | `flex`
-✅ | `flex-col`
-✅ | `justify-center`
-✅ | `justify-start`
-✅ | `justify-end`
-✅ | `items-center`
-✅ | `items-start`
-✅ | `items-end`
+✅ | `hidden`
+❌ | `inline-flex`
 ❌ | `block`
 ❌ | `inline-block`
 ❌ | `inline`
-❌ | `inline-flex`
 ❌ | `table`
 ❌ | `inline-table`
 ❌ | `table-caption`
@@ -166,18 +162,108 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ❌ | `inline-grid`
 ❌ | `contents`
 ❌ | `list-item`
-✅ | `hidden`
+
+#### Flex Direction
 ✅ | `flex-row`
 🚧 | `flex-row-reverse`
+✅ | `flex-col`
 🚧 | `flex-col-reverse`
+
+#### Flex Wrap
 ✅ | `flex-wrap`
-🚧 | `flex-wrap-reverse`
+❌ | `flex-wrap-reverse`
 ✅ | `flex-nowrap`
+
+#### Flex
+🚧 | `flex-1`
+❌ | `flex-auto`
+❌ | `flex-initial`
+🚧 | `flex-none`
+
+#### Flex Grow
+🚧 | `flex-grow`
+❌ | `flex-grow-0`
+
+#### Flex Shrink
+🚧 | `flex-shrink`
+❌ | `flex-shrink-0`
+
+#### Order
+✅ | `order-1`
+✅ | `order-2`
+✅ | `order-3`
+✅ | `order-4`
+✅ | `order-5`
+✅ | `order-6`
+✅ | `order-7`
+✅ | `order-8`
+✅ | `order-9`
+✅ | `order-10`
+✅ | `order-11`
+✅ | `order-12`
+❌ | `order-first`
+❌ | `order-last`
+❌ | `order-none`
+
+#### Justify Content
+✅ | `justify-start`
+✅ | `justify-end`
+✅ | `justify-center`
 ✅ | `justify-between`
 ✅ | `justify-around`
 ✅ | `justify-evenly`
+
+#### Justify Items
+❌ | `justify-items-start`
+❌ | `justify-items-end`
+❌ | `justify-items-center`
+❌ | `justify-items-stretch`
+
+#### Align Content
+❌ | `align-content-start`
+❌ | `align-content-end`
+❌ | `align-content-center`
+❌ | `align-content-between`
+❌ | `align-content-around`
+❌ | `align-content-evenly`
+❌ | `align-content-stretch`
+
+#### Align Items
+✅ | `items-start`
+✅ | `items-end`
+✅ | `items-center`
 🚧 | `items-baseline`
 🚧 | `items-stretch`
+
+#### Align Self
+❌ | `self-auto`
+❌ | `self-start`
+❌ | `self-end`
+❌ | `self-center`
+❌ | `self-stretch`
+❌ | `self-baseline`
+
+#### Place Content
+❌ | `place-content-start`
+❌ | `place-content-end`
+❌ | `place-content-center`
+❌ | `place-content-between`
+❌ | `place-content-around`
+❌ | `place-content-evenly`
+❌ | `place-content-stretch`
+
+#### Place Items
+❌ | `place-items-start`
+❌ | `place-items-end`
+❌ | `place-items-center`
+❌ | `place-items-stretch`
+
+#### Place Self
+❌ | `place-self-auto`
+❌ | `place-self-start`
+❌ | `place-self-end`
+❌ | `place-self-center`
+❌ | `place-self-stretch`
 
 ### Gap
 ✅ | `gap-0`
