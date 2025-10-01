@@ -165,9 +165,9 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 
 #### Flex Direction
 ✅ | `flex-row`
-🚧 | `flex-row-reverse`
+❌ | `flex-row-reverse`
 ✅ | `flex-col`
-🚧 | `flex-col-reverse`
+❌ | `flex-col-reverse`
 
 #### Flex Wrap
 ✅ | `flex-wrap`
@@ -233,7 +233,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `items-end`
 ✅ | `items-center`
 ❌ | `items-baseline`
-🚧 | `items-stretch`
+❌ | `items-stretch`
 
 #### Align Self
 ❌ | `self-auto`
