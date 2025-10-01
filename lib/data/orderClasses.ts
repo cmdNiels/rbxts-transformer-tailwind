@@ -1,4 +1,4 @@
-import type { ClassMapping } from "../../types";
+import type ClassMapping from "../../types/ClassMapping";
 
 export default {
 	"order-first": { LayoutOrder: -999999999 },

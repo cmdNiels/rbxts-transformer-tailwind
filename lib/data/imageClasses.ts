@@ -1,4 +1,4 @@
-import type { ClassMapping } from "../../types";
+import type ClassMapping from "../../types/ClassMapping";
 import generateImageColorClasses from "../utils/colors/generateImageColorClasses";
 
 export default {

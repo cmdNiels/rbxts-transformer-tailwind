@@ -1,4 +1,4 @@
-import type { ClassMapping } from "types";
+import type ClassMapping from "../../types/ClassMapping";
 
 export default {
 	"scale-0": { _uiElement: { type: "UIScale", scale: 0 } },

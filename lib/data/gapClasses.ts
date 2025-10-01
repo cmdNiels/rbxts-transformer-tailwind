@@ -1,4 +1,4 @@
-import type { ClassMapping } from "../../types";
+import type ClassMapping from "../../types/ClassMapping";
 
 export default {
 	"gap-0": { _uiElement: { type: "UIListLayout", spacing: 0 } },

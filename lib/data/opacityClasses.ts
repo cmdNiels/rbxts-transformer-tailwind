@@ -1,4 +1,4 @@
-import type { ClassMapping } from "../../types";
+import type ClassMapping from "../../types/ClassMapping";
 
 export default {
 	// General opacity-* classes removed due to conflicts with existing UIStroke elements

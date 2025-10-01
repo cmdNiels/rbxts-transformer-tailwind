@@ -1,4 +1,4 @@
-import type { ClassMapping } from "../../../types";
+import type ClassMapping from "../../../types/ClassMapping";
 import { tailwindColors } from "../../data/tailwindColors";
 
 /**
