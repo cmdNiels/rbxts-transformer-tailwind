@@ -16,6 +16,7 @@ import placeholderClasses from "../data/placeholderClasses";
 import textClasses from "../data/textClasses";
 import typographyClasses from "../data/typographyClasses";
 import widthClasses from "../data/widthClasses";
+import zIndexClasses from "../data/zIndexClasses";
 import hexToRgb from "./hexToRgb";
 
 /**
@@ -39,6 +40,7 @@ export default function createClassMap(
 		...imageClasses,
 		...placeholderClasses,
 		...opacityClasses,
+		...zIndexClasses,
 	};
 
 	// Extend with Tailwind config if available

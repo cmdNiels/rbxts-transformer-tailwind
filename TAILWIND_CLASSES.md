@@ -678,12 +678,12 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ❌ | `collapse`
 
 ### Z-Index
-🚧 | `z-0`
-🚧 | `z-10`
-🚧 | `z-20`
-🚧 | `z-30`
-🚧 | `z-40`
-🚧 | `z-50`
+✅ | `z-0`
+✅ | `z-10`
+✅ | `z-20`
+✅ | `z-30`
+✅ | `z-40`
+✅ | `z-50`
 ❌ | `z-auto`
 
 ## Transforms
