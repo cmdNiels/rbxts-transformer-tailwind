@@ -22,5 +22,6 @@ export default {
 	"shadow-lg": { _uiElement: "stroke", thickness: 2, transparency: 0.1 },
 
 	// Border colors - generates all color variations
+	"border-transparent": { _uiElement: "stroke", transparency: 1 },
 	...generateBorderColorClasses(),
 } as Record<string, ClassMapping>;

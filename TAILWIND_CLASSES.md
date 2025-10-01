@@ -338,7 +338,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ### Text Colors
 ✅ | `text-white`
 ✅ | `text-black`
-🚧 | `text-transparent`
+✅ | `text-transparent`
 ✅ | `text-slate-*`
 ✅ | `text-gray-*`
 ✅ | `text-zinc-*`
@@ -367,7 +367,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ### Image Colors
 ✅ | `image-white`
 ✅ | `image-black`
-🚧 | `image-transparent`
+✅ | `image-transparent`
 ✅ | `image-slate-*`
 ✅ | `image-gray-*`
 ✅ | `image-zinc-*`
@@ -396,7 +396,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ### Placeholder Colors
 ✅ | `placeholder-white`
 ✅ | `placeholder-black`
-🚧 | `placeholder-transparent`
+❌ | `placeholder-transparent`
 ✅ | `placeholder-slate-*`
 ✅ | `placeholder-gray-*`
 ✅ | `placeholder-zinc-*`
@@ -533,7 +533,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ### Border Color
 ✅ | `border-white`  
 ✅ | `border-black`  
-🚧 | `border-transparent`
+✅ | `border-transparent`
 ✅ | `border-slate-*`
 ✅ | `border-gray-*`
 ✅ | `border-zinc-*`
@@ -596,22 +596,6 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ❌ | `opacity-95`
 ❌ | `opacity-100`
 
-✅ | `text-opacity-0`
-✅ | `text-opacity-5`
-✅ | `text-opacity-10`
-✅ | `text-opacity-20`
-✅ | `text-opacity-25`
-✅ | `text-opacity-30`
-✅ | `text-opacity-40`
-✅ | `text-opacity-50`
-✅ | `text-opacity-60`
-✅ | `text-opacity-70`
-✅ | `text-opacity-75`
-✅ | `text-opacity-80`
-✅ | `text-opacity-90`
-✅ | `text-opacity-95`
-✅ | `text-opacity-100`
-
 ✅ | `bg-opacity-0`
 ✅ | `bg-opacity-5`
 ✅ | `bg-opacity-10`
@@ -628,6 +612,38 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `bg-opacity-95`
 ✅ | `bg-opacity-100`
 
+✅ | `text-opacity-0`
+✅ | `text-opacity-5`
+✅ | `text-opacity-10`
+✅ | `text-opacity-20`
+✅ | `text-opacity-25`
+✅ | `text-opacity-30`
+✅ | `text-opacity-40`
+✅ | `text-opacity-50`
+✅ | `text-opacity-60`
+✅ | `text-opacity-70`
+✅ | `text-opacity-75`
+✅ | `text-opacity-80`
+✅ | `text-opacity-90`
+✅ | `text-opacity-95`
+✅ | `text-opacity-100`
+
+✅ | `image-opacity-0`
+✅ | `image-opacity-5`
+✅ | `image-opacity-10`
+✅ | `image-opacity-20`
+✅ | `image-opacity-25`
+✅ | `image-opacity-30`
+✅ | `image-opacity-40`
+✅ | `image-opacity-50`
+✅ | `image-opacity-60`
+✅ | `image-opacity-70`
+✅ | `image-opacity-75`
+✅ | `image-opacity-80`
+✅ | `image-opacity-90`
+✅ | `image-opacity-95`
+✅ | `image-opacity-100`
+
 ✅ | `border-opacity-0`
 ✅ | `border-opacity-5`
 ✅ | `border-opacity-10`
@@ -643,6 +659,22 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `border-opacity-90`
 ✅ | `border-opacity-95`
 ✅ | `border-opacity-100`
+
+❌ | `placeholder-opacity-0`
+❌ | `placeholder-opacity-5`
+❌ | `placeholder-opacity-10`
+❌ | `placeholder-opacity-20`
+❌ | `placeholder-opacity-25`
+❌ | `placeholder-opacity-30`
+❌ | `placeholder-opacity-40`
+❌ | `placeholder-opacity-50`
+❌ | `placeholder-opacity-60`
+❌ | `placeholder-opacity-70`
+❌ | `placeholder-opacity-75`
+❌ | `placeholder-opacity-80`
+❌ | `placeholder-opacity-90`
+❌ | `placeholder-opacity-95`
+❌ | `placeholder-opacity-100`
 
 ## Positioning
 
