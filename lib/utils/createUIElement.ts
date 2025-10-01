@@ -17,7 +17,7 @@ import createEnumExpression from "../expressions/createEnumExpression";
  */
 export default function createUIElement(factory: ts.NodeFactory, element: UIElement): ts.JsxElement | undefined {
 	switch (element.type) {
-		case "padding": {
+		case "UIPadding": {
 			const paddingTop = (element.top as number) || 0;
 			const paddingBottom = (element.bottom as number) || 0;
 			const paddingLeft = (element.left as number) || 0;
@@ -75,7 +75,7 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 			);
 		}
 
-		case "corner": {
+		case "UICorner": {
 			return factory.createJsxElement(
 				factory.createJsxOpeningElement(
 					factory.createIdentifier("uicorner"),
@@ -98,7 +98,7 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 			);
 		}
 
-		case "listLayout": {
+		case "UIListLayout": {
 			const attributes = [
 				factory.createJsxAttribute(
 					factory.createIdentifier("SortOrder"),
@@ -190,7 +190,7 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 			);
 		}
 
-		case "flexItem": {
+		case "UIFlexItem": {
 			const attributes = [];
 
 			if (element.flexMode) {
@@ -234,7 +234,7 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 			);
 		}
 
-		case "stroke": {
+		case "UIStroke": {
 			return factory.createJsxElement(
 				factory.createJsxOpeningElement(
 					factory.createIdentifier("uistroke"),
@@ -272,7 +272,7 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 			);
 		}
 
-		case "scale": {
+		case "UIScale": {
 			return factory.createJsxElement(
 				factory.createJsxOpeningElement(
 					factory.createIdentifier("uiscale"),

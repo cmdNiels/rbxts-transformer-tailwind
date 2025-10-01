@@ -58,8 +58,10 @@ export default function createClassMap(
 					baseMap[`image-${colorName}`] = { ImageColor3: rgb };
 					baseMap[`placeholder-${colorName}`] = { PlaceholderColor3: rgb };
 					baseMap[`border-${colorName}`] = {
-						_uiElement: "stroke",
-						color: rgb,
+						_uiElement: {
+							type: "UIStroke",
+							color: rgb,
+						},
 					};
 				}
 			}

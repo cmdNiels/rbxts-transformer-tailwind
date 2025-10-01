@@ -27,15 +27,18 @@ export default function parseClasses(
 		const mapping = classMapToUse[cls];
 		if (mapping) {
 			if (mapping._uiElement) {
-				const elementType = mapping._uiElement;
-				if (!uiElementsMap[elementType]) {
-					uiElementsMap[elementType] = { type: elementType };
+				let elementConfig: Record<string, unknown>;
+				if (typeof mapping._uiElement === "string") {
+					elementConfig = { type: mapping._uiElement };
+				} else {
+					elementConfig = { ...mapping._uiElement };
 				}
-				// Merge properties for the same UI element type
-				for (const key of Object.keys(mapping)) {
-					if (key !== "_uiElement" && Object.prototype.hasOwnProperty.call(mapping, key)) {
-						uiElementsMap[elementType][key] = mapping[key];
-					}
+				const elementType = elementConfig.type as string;
+				if (!uiElementsMap[elementType]) {
+					uiElementsMap[elementType] = elementConfig;
+				} else {
+					// Merge properties for the same UI element type
+					Object.assign(uiElementsMap[elementType], elementConfig);
 				}
 			} else if (mapping.Size) {
 				// Handle Size property specially to merge x and y

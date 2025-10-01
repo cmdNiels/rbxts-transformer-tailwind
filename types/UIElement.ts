@@ -4,5 +4,5 @@ import type UIPadding from "./UIPadding";
 import type UIVisual from "./UIVisual";
 
 export default interface UIElement extends UIPadding, UIBorder, UILayout, UIVisual {
-	type: string;
+	type: "UICorner" | "UIFlexItem" | "UIListLayout" | "UIPadding" | "UIStroke" | "UIScale";
 }

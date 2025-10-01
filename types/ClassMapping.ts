@@ -1,4 +1,5 @@
 import type UDimValue from "./UDimValue";
+import type UIElement from "./UIElement";
 
 export default interface ClassMapping {
 	[key: string]: unknown;
@@ -6,5 +7,5 @@ export default interface ClassMapping {
 		x?: UDimValue;
 		y?: UDimValue;
 	};
-	_uiElement?: string;
+	_uiElement?: UIElement;
 }

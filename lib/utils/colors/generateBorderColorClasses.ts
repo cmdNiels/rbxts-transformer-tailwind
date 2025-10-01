@@ -13,8 +13,10 @@ export default function generateBorderColorClasses(includeColors?: string[]): Re
 		if (tailwindColors[colorName]) {
 			const className = `border-${colorName}`;
 			classes[className] = {
-				_uiElement: "stroke",
-				color: tailwindColors[colorName],
+				_uiElement: {
+					type: "UIStroke",
+					color: tailwindColors[colorName],
+				},
 			};
 		}
 	}
