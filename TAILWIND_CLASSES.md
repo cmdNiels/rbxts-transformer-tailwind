@@ -166,7 +166,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ❌ | `inline-grid`
 ❌ | `contents`
 ❌ | `list-item`
-🚧 | `hidden`
+✅ | `hidden`
 ✅ | `flex-row`
 🚧 | `flex-row-reverse`
 🚧 | `flex-col-reverse`

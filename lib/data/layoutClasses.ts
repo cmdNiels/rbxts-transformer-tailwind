@@ -15,4 +15,5 @@ export default {
 	"items-center": { _uiElement: "listLayout", verticalAlignment: "Center" },
 	"items-start": { _uiElement: "listLayout", verticalAlignment: "Top" },
 	"items-end": { _uiElement: "listLayout", verticalAlignment: "Bottom" },
+	hidden: { Visible: false },
 } as Record<string, ClassMapping>;
