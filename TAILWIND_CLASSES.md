@@ -705,8 +705,8 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ❌ | `inset-full`
 
 ### Visibility
-🚧 | `visible`
-🚧 | `invisible`
+❌ | `visible` Use the appropriate opacity-* classes
+❌ | `invisible` Use the appropriate opacity-* classes
 ❌ | `collapse`
 
 ### Z-Index
