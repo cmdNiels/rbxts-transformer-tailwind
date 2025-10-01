@@ -71,7 +71,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ❌ | `w-screen`
 ❌ | `w-min`
 ❌ | `w-max`
-🚧 | `w-fit`
+✅ | `w-fit`
 
 ### Height
 ✅ | `h-auto`
@@ -136,7 +136,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ❌ | `h-screen`
 ❌ | `h-min`
 ❌ | `h-max`
-🚧 | `h-fit`
+✅ | `h-fit`
 
 ### Flexbox & Grid
 ✅ | `flex`

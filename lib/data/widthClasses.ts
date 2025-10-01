@@ -2,6 +2,7 @@ import type { ClassMapping } from "../../types";
 
 export default {
 	"w-auto": { AutomaticSize: "X" },
+	"w-fit": { AutomaticSize: "X" },
 	"w-0": { Size: { x: { scale: 0, offset: 0 } } },
 	"w-px": { Size: { x: { scale: 0, offset: 1 } } },
 	"w-0.5": { Size: { x: { scale: 0, offset: 2 } } },

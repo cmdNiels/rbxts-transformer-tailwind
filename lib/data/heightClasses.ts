@@ -2,6 +2,7 @@ import type { ClassMapping } from "../../types";
 
 export default {
 	"h-auto": { AutomaticSize: "Y" },
+	"h-fit": { AutomaticSize: "Y" },
 	"h-0": { Size: { y: { scale: 0, offset: 0 } } },
 	"h-px": { Size: { y: { scale: 0, offset: 1 } } },
 	"h-0.5": { Size: { y: { scale: 0, offset: 2 } } },
