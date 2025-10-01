@@ -567,9 +567,9 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `normal-case`
 
 ### Text Overflow
-🚧 | `truncate`
-🚧 | `text-ellipsis`
-🚧 | `text-clip`
+✅ | `truncate`
+✅ | `text-ellipsis`
+❌ | `text-clip`
 
 ### Whitespace
 ❌ | `whitespace-normal`
