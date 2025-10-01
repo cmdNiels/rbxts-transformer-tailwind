@@ -433,11 +433,11 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `text-2xl`
 ✅ | `text-3xl`
 ✅ | `text-4xl`
-🚧 | `text-5xl`
-🚧 | `text-6xl`
-🚧 | `text-7xl`
-🚧 | `text-8xl`
-🚧 | `text-9xl`
+✅ | `text-5xl`
+✅ | `text-6xl`
+✅ | `text-7xl`
+✅ | `text-8xl`
+✅ | `text-9xl`
 
 ### Font Weight
 ✅ | `font-thin`

@@ -18,6 +18,11 @@ export default {
 	"text-2xl": { TextSize: 24 },
 	"text-3xl": { TextSize: 30 },
 	"text-4xl": { TextSize: 36 },
+	"text-5xl": { TextSize: 48 },
+	"text-6xl": { TextSize: 60 },
+	"text-7xl": { TextSize: 72 },
+	"text-8xl": { TextSize: 96 },
+	"text-9xl": { TextSize: 128 },
 
 	// Font weights
 	"font-thin": { FontWeight: "Thin" },
