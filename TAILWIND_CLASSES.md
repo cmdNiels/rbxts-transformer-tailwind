@@ -496,15 +496,15 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ## Borders
 
 ### Border Radius
-🚧 | `rounded-none`
+✅ | `rounded-none`
 ✅ | `rounded`
 ✅ | `rounded-sm`
 ✅ | `rounded-md`
 ✅ | `rounded-lg`
 ✅ | `rounded-xl`
 ✅ | `rounded-2xl`
-🚧 | `rounded-3xl`
-🚧 | `rounded-4xl`
+✅ | `rounded-3xl`
+✅ | `rounded-4xl`
 ✅ | `rounded-full`
 ❌ | `rounded-t-*`
 ❌ | `rounded-r-*`
@@ -516,7 +516,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ❌ | `rounded-bl-*`
 
 ### Border Width
-🚧 | `border-0`
+✅ | `border-0`
 ✅ | `border`
 ✅ | `border-2`
 ✅ | `border-4`
