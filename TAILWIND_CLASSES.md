@@ -189,6 +189,8 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `shrink-0`
 
 #### Order
+✅ | `order-first`
+✅ | `order-none`
 ✅ | `order-1`
 ✅ | `order-2`
 ✅ | `order-3`
@@ -201,9 +203,7 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `order-10`
 ✅ | `order-11`
 ✅ | `order-12`
-❌ | `order-first`
-❌ | `order-last`
-❌ | `order-none`
+✅ | `order-last`
 
 #### Justify Content
 ✅ | `justify-start`
