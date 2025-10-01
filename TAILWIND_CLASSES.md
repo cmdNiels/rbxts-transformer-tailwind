@@ -181,12 +181,12 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 🚧 | `flex-none`
 
 #### Flex Grow
-🚧 | `flex-grow`
-❌ | `flex-grow-0`
+✅ | `grow`
+✅ | `grow-0`
 
 #### Flex Shrink
-🚧 | `flex-shrink`
-❌ | `flex-shrink-0`
+✅ | `shrink`
+✅ | `shrink-0`
 
 #### Order
 ✅ | `order-1`

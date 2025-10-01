@@ -193,6 +193,50 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 			);
 		}
 
+		case "flexItem": {
+			const attributes = [];
+
+			if (element.flexMode) {
+				attributes.push(
+					factory.createJsxAttribute(
+						factory.createIdentifier("FlexMode"),
+						factory.createJsxExpression(
+							undefined,
+							createEnumExpression(factory, "UIFlexMode", element.flexMode),
+						),
+					),
+				);
+			}
+
+			if (element.growRatio !== undefined) {
+				attributes.push(
+					factory.createJsxAttribute(
+						factory.createIdentifier("GrowRatio"),
+						factory.createJsxExpression(undefined, factory.createNumericLiteral(element.growRatio)),
+					),
+				);
+			}
+
+			if (element.shrinkRatio !== undefined) {
+				attributes.push(
+					factory.createJsxAttribute(
+						factory.createIdentifier("ShrinkRatio"),
+						factory.createJsxExpression(undefined, factory.createNumericLiteral(element.shrinkRatio)),
+					),
+				);
+			}
+
+			return factory.createJsxElement(
+				factory.createJsxOpeningElement(
+					factory.createIdentifier("uiflexitem"),
+					undefined,
+					factory.createJsxAttributes(attributes),
+				),
+				[],
+				factory.createJsxClosingElement(factory.createIdentifier("uiflexitem")),
+			);
+		}
+
 		case "stroke": {
 			return factory.createJsxElement(
 				factory.createJsxOpeningElement(

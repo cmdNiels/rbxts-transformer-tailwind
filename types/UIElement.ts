@@ -19,4 +19,7 @@ export default interface UIElement {
 	thickness?: number;
 	color?: RGBColor;
 	transparency?: number;
+	flexMode?: string;
+	growRatio?: number;
+	shrinkRatio?: number;
 }

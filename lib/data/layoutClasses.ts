@@ -15,5 +15,9 @@ export default {
 	"items-center": { _uiElement: "listLayout", verticalAlignment: "Center" },
 	"items-start": { _uiElement: "listLayout", verticalAlignment: "Top" },
 	"items-end": { _uiElement: "listLayout", verticalAlignment: "Bottom" },
+	grow: { _uiElement: "flexItem", flexMode: "Custom", growRatio: 1 },
+	shrink: { _uiElement: "flexItem", flexMode: "Custom", shrinkRatio: 1 },
+	"grow-0": { _uiElement: "flexItem", flexMode: "Custom", growRatio: 0 },
+	"shrink-0": { _uiElement: "flexItem", flexMode: "Custom", shrinkRatio: 0 },
 	hidden: { Visible: false },
 } as Record<string, ClassMapping>;
