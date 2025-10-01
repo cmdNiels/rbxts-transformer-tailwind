@@ -14,6 +14,7 @@ import opacityClasses from "../data/opacityClasses";
 import orderClasses from "../data/orderClasses";
 import paddingClasses from "../data/paddingClasses";
 import placeholderClasses from "../data/placeholderClasses";
+import scaleClasses from "../data/scaleClasses";
 import textClasses from "../data/textClasses";
 import typographyClasses from "../data/typographyClasses";
 import widthClasses from "../data/widthClasses";
@@ -43,6 +44,7 @@ export default function createClassMap(
 		...orderClasses,
 		...placeholderClasses,
 		...zIndexClasses,
+		...scaleClasses,
 	};
 
 	// Extend with Tailwind config if available

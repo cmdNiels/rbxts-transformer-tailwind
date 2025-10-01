@@ -274,6 +274,26 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 				factory.createJsxClosingElement(factory.createIdentifier("uistroke")),
 			);
 		}
+
+		case "scale": {
+			return factory.createJsxElement(
+				factory.createJsxOpeningElement(
+					factory.createIdentifier("uiscale"),
+					undefined,
+					factory.createJsxAttributes([
+						factory.createJsxAttribute(
+							factory.createIdentifier("Scale"),
+							factory.createJsxExpression(
+								undefined,
+								factory.createNumericLiteral(element.scale as number),
+							),
+						),
+					]),
+				),
+				[],
+				factory.createJsxClosingElement(factory.createIdentifier("uiscale")),
+			);
+		}
 	}
 
 	return undefined;

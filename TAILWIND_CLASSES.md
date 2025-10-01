@@ -807,16 +807,16 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ## Transforms
 
 ### Scale
-🚧 | `scale-0`
-🚧 | `scale-50`
-🚧 | `scale-75`
-🚧 | `scale-90`
-🚧 | `scale-95`
-🚧 | `scale-100`
-🚧 | `scale-105`
-🚧 | `scale-110`
-🚧 | `scale-125`
-🚧 | `scale-150`
+✅ | `scale-0`
+✅ | `scale-50`
+✅ | `scale-75`
+✅ | `scale-90`
+✅ | `scale-95`
+✅ | `scale-100`
+✅ | `scale-105`
+✅ | `scale-110`
+✅ | `scale-125`
+✅ | `scale-150`
 
 ### Rotate
 ❌ | `rotate-0`

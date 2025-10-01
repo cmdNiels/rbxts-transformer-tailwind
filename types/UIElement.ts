@@ -22,4 +22,5 @@ export default interface UIElement {
 	flexMode?: string;
 	growRatio?: number;
 	shrinkRatio?: number;
+	scale?: number;
 }
