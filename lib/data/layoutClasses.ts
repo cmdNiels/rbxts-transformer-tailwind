@@ -19,5 +19,7 @@ export default {
 	shrink: { _uiElement: "flexItem", flexMode: "Custom", shrinkRatio: 1 },
 	"grow-0": { _uiElement: "flexItem", flexMode: "Custom", growRatio: 0 },
 	"shrink-0": { _uiElement: "flexItem", flexMode: "Custom", shrinkRatio: 0 },
+	"flex-1": { _uiElement: "flexItem", flexMode: "Custom", growRatio: 1, shrinkRatio: 1 },
+	"flex-none": { _uiElement: "flexItem", flexMode: "Custom", growRatio: 0, shrinkRatio: 0 },
 	hidden: { Visible: false },
 } as Record<string, ClassMapping>;

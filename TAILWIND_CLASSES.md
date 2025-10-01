@@ -175,10 +175,10 @@ This document lists all Tailwind CSS classes and their support status in the rbx
 ✅ | `flex-nowrap`
 
 #### Flex
-🚧 | `flex-1`
+✅ | `flex-1`
 ❌ | `flex-auto`
 ❌ | `flex-initial`
-🚧 | `flex-none`
+✅ | `flex-none`
 
 #### Flex Grow
 ✅ | `grow`
