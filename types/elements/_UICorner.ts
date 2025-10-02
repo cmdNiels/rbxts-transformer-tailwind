@@ -1,8 +1,6 @@
-import "@rbxts/types";
-
 import type _UDim from "types/internal/_UDim";
 
-type _UICorner = Omit<UICorner, "CornerRadius"> & {
+type _UICorner = {
 	CornerRadius: _UDim;
 };
 

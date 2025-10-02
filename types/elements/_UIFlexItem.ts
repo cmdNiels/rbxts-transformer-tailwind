@@ -1,6 +1,4 @@
-import "@rbxts/types";
-
-type _UIFlexItem = Omit<UIFlexItem, "FlexMode" | "GrowRatio" | "ShrinkRatio"> & {
+type _UIFlexItem = {
 	FlexMode?: string;
 	GrowRatio?: number;
 	ShrinkRatio?: number;

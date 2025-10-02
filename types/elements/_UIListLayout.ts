@@ -1,9 +1,4 @@
-import "@rbxts/types";
-
-type _UIListLayout = Omit<
-	UIListLayout,
-	"Direction" | "Spacing" | "HorizontalAlignment" | "VerticalAlignment" | "Wraps" | "FlexAlignment"
-> & {
+type _UIListLayout = {
 	Direction?: string;
 	Spacing?: number;
 	HorizontalAlignment?: string;

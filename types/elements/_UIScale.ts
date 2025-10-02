@@ -1,6 +1,4 @@
-import "@rbxts/types";
-
-type _UIScale = Omit<UIScale, "Scale"> & {
+type _UIScale = {
 	Scale: number;
 };
 
