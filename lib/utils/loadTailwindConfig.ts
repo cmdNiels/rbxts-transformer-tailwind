@@ -22,11 +22,10 @@ export default function loadTailwindConfig(projectRoot: string, configPath?: str
 		const fullPath = path.isAbsolute(configPath) ? configPath : path.join(projectRoot, configPath);
 		if (fs.existsSync(fullPath)) {
 			try {
-				// Clear require cache to ensure fresh config
-				// eslint-disable-next-line @typescript-eslint/no-require-imports
-				delete require.cache[require.resolve(fullPath)];
-				// eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
-				return require(fullPath) as TailwindConfig;
+				// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-explicit-any
+				delete (require as any).cache[(require as any).resolve(fullPath)];
+				// eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports, @typescript-eslint/no-explicit-any
+				return (require as any)(fullPath) as TailwindConfig;
 			} catch (e) {
 				console.warn(`Failed to load Tailwind config from ${fullPath}:`, e);
 			}
