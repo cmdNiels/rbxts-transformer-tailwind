@@ -2,8 +2,9 @@
  * Parse className string into properties and UI elements
  */
 
+import type _UDim2 from "types/internal/_UDim2";
+
 import type ClassMapping from "../../types/ClassMapping";
-import type SizeValue from "../../types/SizeValue";
 
 /**
  * Parse className string into properties and UI elements
@@ -20,7 +21,7 @@ export default function parseClasses(
 	const classes = classNames.split(" ").filter((c) => c !== "");
 	const properties: unknown = {};
 	const uiElementsMap: Record<string, Record<string, unknown>> = {};
-	const size: SizeValue = {};
+	const size: _UDim2 = {};
 	const automaticSizeValues: string[] = [];
 
 	for (const cls of classes) {
@@ -41,9 +42,9 @@ export default function parseClasses(
 					Object.assign(uiElementsMap[elementType], elementConfig);
 				}
 			} else if (mapping.Size) {
-				// Handle Size property specially to merge x and y
-				if (mapping.Size.x) size.x = mapping.Size.x;
-				if (mapping.Size.y) size.y = mapping.Size.y;
+				// Handle Size property specially to merge X and Y
+				if (mapping.Size.X) size.X = mapping.Size.X;
+				if (mapping.Size.Y) size.Y = mapping.Size.Y;
 			} else if (mapping.AutomaticSize) {
 				automaticSizeValues.push(mapping.AutomaticSize as string);
 			} else {
@@ -62,10 +63,10 @@ export default function parseClasses(
 	const uiElements = Object.values(uiElementsMap);
 
 	// Build final Size if either x or y was specified
-	if (size.x || size.y) {
+	if (size.X || size.Y) {
 		(properties as Record<string, unknown>).Size = {
-			x: size.x || { scale: 0, offset: 0 },
-			y: size.y || { scale: 0, offset: 0 },
+			X: size.X || { Scale: 0, Offset: 0 },
+			Y: size.Y || { Scale: 0, Offset: 0 },
 		};
 	}
 

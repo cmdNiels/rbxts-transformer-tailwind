@@ -3,10 +3,10 @@
  * A TypeScript transformer that converts Tailwind CSS classes to Roblox UI properties
  */
 
+import type UIElement from "types/elements/_UIElement";
 import * as ts from "typescript";
 
 import type TailwindTransformerConfig from "../types/TailwindTransformerConfig";
-import type UIElement from "../types/UIElement";
 import createClassMap from "./utils/createClassMap";
 import createPropertyValue from "./utils/createPropertyValue";
 import createUIElement from "./utils/createUIElement";

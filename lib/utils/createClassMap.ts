@@ -60,7 +60,7 @@ export default function createClassMap(
 					baseMap[`border-${colorName}`] = {
 						_uiElement: {
 							type: "UIStroke",
-							color: rgb,
+							Color: rgb,
 						},
 					};
 				}

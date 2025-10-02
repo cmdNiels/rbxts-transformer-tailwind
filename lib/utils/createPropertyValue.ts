@@ -1,7 +1,7 @@
+import type _Color3 from "types/internal/_Color3";
+import type _UDim2 from "types/internal/_UDim2";
 import type ts from "typescript";
 
-import type RGBColor from "../../types/RGBColor";
-import type SizeValue from "../../types/SizeValue";
 import createColor3Expression from "../expressions/createColor3Expression";
 import createEnumExpression from "../expressions/createEnumExpression";
 import createUDim2Expression from "../expressions/createUDim2Expression";
@@ -24,25 +24,25 @@ export default function createPropertyValue(factory: ts.NodeFactory, key: string
 	switch (key) {
 		// Color3 properties
 		case "BackgroundColor3":
-			return createColor3Expression(factory, value as RGBColor);
+			return createColor3Expression(factory, value as _Color3);
 		case "TextColor3":
-			return createColor3Expression(factory, value as RGBColor);
+			return createColor3Expression(factory, value as _Color3);
 		case "ImageColor3":
-			return createColor3Expression(factory, value as RGBColor);
+			return createColor3Expression(factory, value as _Color3);
 		case "PlaceholderColor3":
-			return createColor3Expression(factory, value as RGBColor);
+			return createColor3Expression(factory, value as _Color3);
 		case "BorderColor3":
-			return createColor3Expression(factory, value as RGBColor);
+			return createColor3Expression(factory, value as _Color3);
 		case "TextStrokeColor3":
-			return createColor3Expression(factory, value as RGBColor);
+			return createColor3Expression(factory, value as _Color3);
 		case "SelectionImageColor3":
-			return createColor3Expression(factory, value as RGBColor);
+			return createColor3Expression(factory, value as _Color3);
 
 		// UDim2 properties
 		case "Size":
-			return createUDim2Expression(factory, value as SizeValue)!;
+			return createUDim2Expression(factory, value as _UDim2)!;
 		case "Position":
-			return createUDim2Expression(factory, value as SizeValue)!;
+			return createUDim2Expression(factory, value as _UDim2)!;
 
 		// Text alignment enums
 		case "TextXAlignment":
@@ -82,13 +82,13 @@ export default function createPropertyValue(factory: ts.NodeFactory, key: string
 		case "ScrollBarThickness":
 			return factory.createNumericLiteral(value as number);
 		case "CanvasSize":
-			return createUDim2Expression(factory, value as SizeValue)!;
+			return createUDim2Expression(factory, value as _UDim2)!;
 		case "ScrollingDirection":
 			return createEnumExpression(factory, "ScrollingDirection", value as string);
 		case "ElasticBehavior":
 			return createEnumExpression(factory, "ElasticBehavior", value as string);
 		case "ScrollBarImageColor3":
-			return createColor3Expression(factory, value as RGBColor);
+			return createColor3Expression(factory, value as _Color3);
 
 		// Image properties
 		case "ScaleType":
@@ -96,9 +96,9 @@ export default function createPropertyValue(factory: ts.NodeFactory, key: string
 		case "ResampleMode":
 			return createEnumExpression(factory, "ResampleMode", value as string);
 		case "ImageRectOffset":
-			return createUDim2Expression(factory, value as SizeValue)!;
+			return createUDim2Expression(factory, value as _UDim2)!;
 		case "ImageRectSize":
-			return createUDim2Expression(factory, value as SizeValue)!;
+			return createUDim2Expression(factory, value as _UDim2)!;
 
 		// Text properties
 		case "TextTruncate":

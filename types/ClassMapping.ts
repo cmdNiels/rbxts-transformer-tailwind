@@ -1,11 +1,8 @@
-import type UDimValue from "./UDimValue";
-import type UIElement from "./UIElement";
+import type UIElement from "./elements/_UIElement";
+import type _UDim2 from "./internal/_UDim2";
 
 export default interface ClassMapping {
 	[key: string]: unknown;
-	Size?: {
-		x?: UDimValue;
-		y?: UDimValue;
-	};
+	Size?: _UDim2;
 	_uiElement?: UIElement;
 }

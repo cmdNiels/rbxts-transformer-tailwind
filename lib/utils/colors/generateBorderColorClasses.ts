@@ -15,7 +15,7 @@ export default function generateBorderColorClasses(includeColors?: string[]): Re
 			classes[className] = {
 				_uiElement: {
 					type: "UIStroke",
-					color: tailwindColors[colorName],
+					Color: tailwindColors[colorName],
 				},
 			};
 		}

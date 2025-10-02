@@ -2,9 +2,8 @@
  * TypeScript expression utilities for rbxts-transformer-tailwind
  */
 
+import type _Color3 from "types/internal/_Color3";
 import type * as ts from "typescript";
-
-import type RGBColor from "../../types/RGBColor";
 
 /**
  * Create Color3.fromRGB expression
@@ -12,8 +11,8 @@ import type RGBColor from "../../types/RGBColor";
  * @param color - RGB color object
  * @returns TypeScript expression for Color3.fromRGB call
  */
-export default function createColor3Expression(factory: ts.NodeFactory, color: RGBColor): ts.Expression {
-	if (!color || typeof color.r !== "number" || typeof color.g !== "number" || typeof color.b !== "number") {
+export default function createColor3Expression(factory: ts.NodeFactory, color: _Color3): ts.Expression {
+	if (!color || typeof color.R !== "number" || typeof color.G !== "number" || typeof color.B !== "number") {
 		// Fallback to white color if color is undefined or invalid
 		return factory.createCallExpression(
 			factory.createPropertyAccessExpression(
@@ -29,9 +28,9 @@ export default function createColor3Expression(factory: ts.NodeFactory, color: R
 		factory.createPropertyAccessExpression(factory.createIdentifier("Color3"), factory.createIdentifier("fromRGB")),
 		undefined,
 		[
-			factory.createNumericLiteral(Math.round(color.r * 255)),
-			factory.createNumericLiteral(Math.round(color.g * 255)),
-			factory.createNumericLiteral(Math.round(color.b * 255)),
+			factory.createNumericLiteral(Math.round(color.R * 255)),
+			factory.createNumericLiteral(Math.round(color.G * 255)),
+			factory.createNumericLiteral(Math.round(color.B * 255)),
 		],
 	);
 }

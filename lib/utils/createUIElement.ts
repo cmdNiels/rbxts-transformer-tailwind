@@ -2,10 +2,10 @@
  * Create JSX element for UI components
  */
 
+import type UIElement from "types/elements/_UIElement";
+import type _Color3 from "types/internal/_Color3";
 import type * as ts from "typescript";
 
-import type RGBColor from "../../types/RGBColor";
-import type UIElement from "../../types/UIElement";
 import createColor3Expression from "../expressions/createColor3Expression";
 import createEnumExpression from "../expressions/createEnumExpression";
 
@@ -18,10 +18,10 @@ import createEnumExpression from "../expressions/createEnumExpression";
 export default function createUIElement(factory: ts.NodeFactory, element: UIElement): ts.JsxElement | undefined {
 	switch (element.type) {
 		case "UIPadding": {
-			const paddingTop = (element.top as number) || 0;
-			const paddingBottom = (element.bottom as number) || 0;
-			const paddingLeft = (element.left as number) || 0;
-			const paddingRight = (element.right as number) || 0;
+			const paddingTop = element.PaddingTop?.Offset || 0;
+			const paddingBottom = element.PaddingBottom?.Offset || 0;
+			const paddingLeft = element.PaddingLeft?.Offset || 0;
+			const paddingRight = element.PaddingRight?.Offset || 0;
 
 			return factory.createJsxElement(
 				factory.createJsxOpeningElement(
@@ -87,7 +87,7 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 								undefined,
 								factory.createNewExpression(factory.createIdentifier("UDim"), undefined, [
 									factory.createNumericLiteral(0),
-									factory.createNumericLiteral(element.radius as number),
+									factory.createNumericLiteral(element.CornerRadius as number),
 								]),
 							),
 						),
@@ -108,12 +108,12 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 					factory.createIdentifier("FillDirection"),
 					factory.createJsxExpression(
 						undefined,
-						createEnumExpression(factory, "FillDirection", element.direction as string),
+						createEnumExpression(factory, "FillDirection", element.Direction as string),
 					),
 				),
 			];
 
-			if (element.spacing) {
+			if (element.Spacing) {
 				attributes.push(
 					factory.createJsxAttribute(
 						factory.createIdentifier("Padding"),
@@ -121,39 +121,39 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 							undefined,
 							factory.createNewExpression(factory.createIdentifier("UDim"), undefined, [
 								factory.createNumericLiteral(0),
-								factory.createNumericLiteral(element.spacing as number),
+								factory.createNumericLiteral(element.Spacing),
 							]),
 						),
 					),
 				);
 			}
 
-			if (element.horizontalAlignment) {
+			if (element.HorizontalAlignment) {
 				attributes.push(
 					factory.createJsxAttribute(
 						factory.createIdentifier("HorizontalAlignment"),
 						factory.createJsxExpression(
 							undefined,
-							createEnumExpression(factory, "HorizontalAlignment", element.horizontalAlignment),
+							createEnumExpression(factory, "HorizontalAlignment", element.HorizontalAlignment),
 						),
 					),
 				);
 			}
 
-			if (element.verticalAlignment) {
+			if (element.VerticalAlignment) {
 				attributes.push(
 					factory.createJsxAttribute(
 						factory.createIdentifier("VerticalAlignment"),
 						factory.createJsxExpression(
 							undefined,
-							createEnumExpression(factory, "VerticalAlignment", element.verticalAlignment),
+							createEnumExpression(factory, "VerticalAlignment", element.VerticalAlignment),
 						),
 					),
 				);
 			}
 
-			if (element.flexAlignment) {
-				const isHorizontal = element.direction === "Horizontal";
+			if (element.FlexAlignment) {
+				const isHorizontal = element.Direction === "Horizontal";
 				const flexProperty = isHorizontal ? "HorizontalFlex" : "VerticalFlex";
 
 				attributes.push(
@@ -161,19 +161,19 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 						factory.createIdentifier(flexProperty),
 						factory.createJsxExpression(
 							undefined,
-							createEnumExpression(factory, "UIFlexAlignment", element.flexAlignment),
+							createEnumExpression(factory, "UIFlexAlignment", element.FlexAlignment),
 						),
 					),
 				);
 			}
 
-			if (element.wraps !== undefined) {
+			if (element.Wraps !== undefined) {
 				attributes.push(
 					factory.createJsxAttribute(
 						factory.createIdentifier("Wraps"),
 						factory.createJsxExpression(
 							undefined,
-							element.wraps ? factory.createTrue() : factory.createFalse(),
+							element.Wraps ? factory.createTrue() : factory.createFalse(),
 						),
 					),
 				);
@@ -193,32 +193,32 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 		case "UIFlexItem": {
 			const attributes = [];
 
-			if (element.flexMode) {
+			if (element.FlexMode) {
 				attributes.push(
 					factory.createJsxAttribute(
 						factory.createIdentifier("FlexMode"),
 						factory.createJsxExpression(
 							undefined,
-							createEnumExpression(factory, "UIFlexMode", element.flexMode),
+							createEnumExpression(factory, "UIFlexMode", element.FlexMode),
 						),
 					),
 				);
 			}
 
-			if (element.growRatio !== undefined) {
+			if (element.GrowRatio !== undefined) {
 				attributes.push(
 					factory.createJsxAttribute(
 						factory.createIdentifier("GrowRatio"),
-						factory.createJsxExpression(undefined, factory.createNumericLiteral(element.growRatio)),
+						factory.createJsxExpression(undefined, factory.createNumericLiteral(element.GrowRatio)),
 					),
 				);
 			}
 
-			if (element.shrinkRatio !== undefined) {
+			if (element.ShrinkRatio !== undefined) {
 				attributes.push(
 					factory.createJsxAttribute(
 						factory.createIdentifier("ShrinkRatio"),
-						factory.createJsxExpression(undefined, factory.createNumericLiteral(element.shrinkRatio)),
+						factory.createJsxExpression(undefined, factory.createNumericLiteral(element.ShrinkRatio)),
 					),
 				);
 			}
@@ -244,23 +244,23 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 							factory.createIdentifier("Thickness"),
 							factory.createJsxExpression(
 								undefined,
-								factory.createNumericLiteral((element.thickness as number) || 1),
+								factory.createNumericLiteral((element.Thickness as number) || 1),
 							),
 						),
 						factory.createJsxAttribute(
 							factory.createIdentifier("Color"),
 							factory.createJsxExpression(
 								undefined,
-								createColor3Expression(factory, element.color as RGBColor),
+								createColor3Expression(factory, element.Color as _Color3),
 							),
 						),
-						...(element.transparency
+						...(element.Transparency
 							? [
 									factory.createJsxAttribute(
 										factory.createIdentifier("Transparency"),
 										factory.createJsxExpression(
 											undefined,
-											factory.createNumericLiteral(element.transparency as number),
+											factory.createNumericLiteral(element.Transparency),
 										),
 									),
 								]
@@ -282,7 +282,7 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 							factory.createIdentifier("Scale"),
 							factory.createJsxExpression(
 								undefined,
-								factory.createNumericLiteral(element.scale as number),
+								factory.createNumericLiteral(element.Scale as number),
 							),
 						),
 					]),
@@ -292,6 +292,4 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 			);
 		}
 	}
-
-	return undefined;
 }

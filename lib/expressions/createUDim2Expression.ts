@@ -2,9 +2,8 @@
  * TypeScript expression utilities for rbxts-transformer-tailwind
  */
 
+import type _UDim2 from "types/internal/_UDim2";
 import type * as ts from "typescript";
-
-import type SizeValue from "../../types/SizeValue";
 
 /**
  * Create UDim2 constructor expression
@@ -12,13 +11,13 @@ import type SizeValue from "../../types/SizeValue";
  * @param size - Size value object
  * @returns TypeScript expression for UDim2 constructor or undefined if incomplete
  */
-export default function createUDim2Expression(factory: ts.NodeFactory, size: SizeValue): ts.Expression | undefined {
-	if (size.x && size.y) {
+export default function createUDim2Expression(factory: ts.NodeFactory, size: _UDim2): ts.Expression | undefined {
+	if (size.X && size.Y) {
 		return factory.createNewExpression(factory.createIdentifier("UDim2"), undefined, [
-			factory.createNumericLiteral(size.x.scale),
-			factory.createNumericLiteral(size.x.offset),
-			factory.createNumericLiteral(size.y.scale),
-			factory.createNumericLiteral(size.y.offset),
+			factory.createNumericLiteral(size.X.Scale ?? 0),
+			factory.createNumericLiteral(size.X.Offset ?? 0),
+			factory.createNumericLiteral(size.Y.Scale ?? 0),
+			factory.createNumericLiteral(size.Y.Offset ?? 0),
 		]);
 	}
 	return undefined;
