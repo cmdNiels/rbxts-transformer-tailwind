@@ -6,13 +6,14 @@
 	"types": "react-jsx.d.ts",
 	"files": [
 		"out/**/*",
-		"types/**/*",
+		"react-jsx.d.ts",
 		"README.md",
 		"LICENSE"
 	],
 	"scripts": {
 		"build": "tsc",
-		"dev": "tsc --watch"
+		"dev": "tsc --watch",
+		"prepublishOnly": "npm run build"
 	},
 	"keywords": [
 		"rbxts",
@@ -26,7 +27,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/cmdNiels/rbxts-transformer-tailwind.git"
+		"url": "git+https://github.com/cmdNiels/rbxts-transformer-tailwind.git"
 	},
 	"homepage": "https://github.com/cmdNiels/rbxts-transformer-tailwind#readme",
 	"bugs": {

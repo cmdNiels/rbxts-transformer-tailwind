@@ -7,7 +7,7 @@ A TypeScript transformer that converts Tailwind CSS classes to Roblox UI propert
 ## Installation
 
 ```bash
-npm install --save-dev git+https://github.com/cmdniels/rbxts-transformer-tailwind.git
+npm install --save-dev rbxts-transformer-tailwind
 ```
 
 ## Setup
