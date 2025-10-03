@@ -1,10 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * rbxts-transformer-tailwind
  * A TypeScript transformer that converts Tailwind CSS classes to Roblox UI properties
  */
 
 import type UIElement from "types/elements/_UIElement";
-import * as ts from "typescript";
+import type { Program, SourceFile, TransformationContext } from "typescript";
+import {
+	isIdentifier,
+	isJsxAttribute,
+	isJsxElement,
+	isJsxExpression,
+	isJsxSelfClosingElement,
+	isJsxText,
+	isStringLiteral,
+	visitEachChild,
+	visitNode,
+} from "typescript";
 
 import type TailwindTransformerConfig from "../types/TailwindTransformerConfig";
 import createClassMap from "./utils/createClassMap";
@@ -16,13 +28,15 @@ import processText from "./utils/processText";
 
 /**
  * Creates a Tailwind CSS transformer for roblox-ts
+ * This is the main entry point when the transformer is used as a packed module
+ * @param program - TypeScript program instance
  * @param config - Transformer configuration options
  * @returns TypeScript transformer factory
  */
-export default function tailwindTransformer(config?: TailwindTransformerConfig): ts.TransformerFactory<ts.SourceFile> {
+export default function transform(program: Program, config?: TailwindTransformerConfig) {
 	console.log("🚀 Running Tailwind transformer");
 
-	return (context: ts.TransformationContext) => {
+	return (context: TransformationContext) => {
 		const { factory } = context;
 
 		// Load Tailwind config and create class map
@@ -37,22 +51,27 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 		const dynamicClassMap = createClassMap(tailwindConfig);
 		console.log("🎨 Class map created with", Object.keys(dynamicClassMap).length, "classes");
 
-		return (sourceFile: ts.SourceFile): ts.SourceFile => {
+		return (sourceFile: any): any => {
+			if (sourceFile.isDeclarationFile || sourceFile.fileName.endsWith(".d.ts")) {
+				return sourceFile;
+			}
+
 			// Only process .tsx and .jsx files
 			if (!sourceFile.fileName.endsWith(".tsx") && !sourceFile.fileName.endsWith(".jsx")) {
 				return sourceFile;
 			}
 
-			function visitor(node: ts.Node): ts.Node {
-				if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
-					const attributes = ts.isJsxElement(node) ? node.openingElement.attributes : node.attributes;
+			function visitor(node: any): any {
+				// Only process JSX elements
+				if (isJsxElement(node) || isJsxSelfClosingElement(node)) {
+					const attributes = isJsxElement(node) ? node.openingElement.attributes : node.attributes;
 
-					let classNameAttr: ts.JsxAttribute | undefined;
-					let textAttr: ts.JsxAttribute | undefined;
-					const otherAttributes: ts.JsxAttributeLike[] = [];
+					let classNameAttr: any;
+					let textAttr: any;
+					const otherAttributes: any[] = [];
 
 					for (const attr of attributes.properties) {
-						if (ts.isJsxAttribute(attr) && ts.isIdentifier(attr.name)) {
+						if (isJsxAttribute(attr) && isIdentifier(attr.name)) {
 							if (attr.name.text === "className") {
 								classNameAttr = attr;
 							} else if (attr.name.text === "Text") {
@@ -68,12 +87,12 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 					if (classNameAttr && classNameAttr.initializer) {
 						let classNames: string = "";
 
-						if (ts.isStringLiteral(classNameAttr.initializer)) {
+						if (isStringLiteral(classNameAttr.initializer)) {
 							classNames = classNameAttr.initializer.text;
 						} else if (
-							ts.isJsxExpression(classNameAttr.initializer) &&
+							isJsxExpression(classNameAttr.initializer) &&
 							classNameAttr.initializer.expression &&
-							ts.isStringLiteral(classNameAttr.initializer.expression)
+							isStringLiteral(classNameAttr.initializer.expression)
 						) {
 							classNames = classNameAttr.initializer.expression.text;
 						}
@@ -84,7 +103,7 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 							config?.warnUnknownClasses,
 						);
 
-						const newAttributes: ts.JsxAttributeLike[] = [...otherAttributes];
+						const newAttributes: any[] = [...otherAttributes];
 
 						// Handle font properties separately to combine FontWeight and FontFamily into FontFace
 						const props = properties as Record<string, unknown>;
@@ -152,7 +171,7 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 										factory.createIdentifier(key),
 										factory.createJsxExpression(
 											undefined,
-											createPropertyValue(factory, key, value),
+											createPropertyValue(program, factory, key, value),
 										),
 									),
 								);
@@ -173,12 +192,12 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 						if (textAttr && (textDecoration || textTransform) && textAttr.initializer) {
 							let textValue: string = "";
 
-							if (ts.isStringLiteral(textAttr.initializer)) {
+							if (isStringLiteral(textAttr.initializer)) {
 								textValue = textAttr.initializer.text;
 							} else if (
-								ts.isJsxExpression(textAttr.initializer) &&
+								isJsxExpression(textAttr.initializer) &&
 								textAttr.initializer.expression &&
-								ts.isStringLiteral(textAttr.initializer.expression)
+								isStringLiteral(textAttr.initializer.expression)
 							) {
 								textValue = textAttr.initializer.expression.text;
 							}
@@ -204,17 +223,17 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 							newAttributes.push(textAttr);
 						}
 
-						const uiElementChildren: ts.JsxElement[] = [];
+						const uiElementChildren: any[] = [];
 						for (const element of uiElements) {
-							const uiElement = createUIElement(factory, element as UIElement);
+							const uiElement = createUIElement(program, factory, element as UIElement);
 							if (uiElement) {
 								uiElementChildren.push(uiElement);
 							}
 						}
 
-						if (ts.isJsxSelfClosingElement(node)) {
+						if (isJsxSelfClosingElement(node)) {
 							if (uiElementChildren.length > 0) {
-								return ts.visitEachChild(
+								return visitEachChild(
 									factory.createJsxElement(
 										factory.createJsxOpeningElement(
 											node.tagName,
@@ -228,7 +247,7 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 									context,
 								);
 							} else {
-								return ts.visitEachChild(
+								return visitEachChild(
 									factory.updateJsxSelfClosingElement(
 										node,
 										node.tagName,
@@ -240,41 +259,41 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 								);
 							}
 						} else {
-							const visitedChildren = node.children.map(
-								(child) => ts.visitNode(child, visitor) as ts.JsxChild,
-							);
+							const visitedChildren = node.children
+								.map((child: any) => child && visitNode(child, visitor))
+								.filter(Boolean);
 
 							// Apply text transformations if present
 							const processedChildren =
 								textDecoration || textTransform
-									? visitedChildren.map((child) => {
-											if (ts.isJsxText(child)) {
-												const processedText = processText(
-													child.text,
-													textTransform,
-													textDecoration,
-												);
-												return factory.createJsxText(processedText);
-											} else if (
-												ts.isJsxExpression(child) &&
-												child.expression &&
-												ts.isStringLiteral(child.expression)
-											) {
-												const processedText = processText(
-													child.expression.text,
-													textTransform,
-													textDecoration,
-												);
-												return factory.createJsxExpression(
-													undefined,
-													factory.createStringLiteral(processedText),
-												);
-											}
-											return child;
-										})
+									? visitedChildren.map((child: any) => {
+										if (isJsxText(child)) {
+											const processedText = processText(
+												child.text,
+												textTransform,
+												textDecoration,
+											);
+											return factory.createJsxText(processedText);
+										} else if (
+											isJsxExpression(child) &&
+											child.expression &&
+											isStringLiteral(child.expression)
+										) {
+											const processedText = processText(
+												child.expression.text,
+												textTransform,
+												textDecoration,
+											);
+											return factory.createJsxExpression(
+												undefined,
+												factory.createStringLiteral(processedText),
+											);
+										}
+										return child;
+									})
 									: visitedChildren;
 
-							const newChildren: ts.JsxChild[] = [...uiElementChildren, ...processedChildren];
+							const newChildren: any[] = [...uiElementChildren, ...processedChildren];
 
 							return factory.createJsxElement(
 								factory.createJsxOpeningElement(
@@ -289,10 +308,16 @@ export default function tailwindTransformer(config?: TailwindTransformerConfig):
 					}
 				}
 
-				return ts.visitEachChild(node, visitor, context);
+				// For non-JSX nodes, continue visiting children but handle errors gracefully
+				try {
+					return visitEachChild(node, visitor, context);
+				} catch {
+					// If visiting fails (e.g., enum members), just return the original node
+					return node;
+				}
 			}
 
-			return ts.visitNode(sourceFile, visitor) as ts.SourceFile;
+			return visitNode(sourceFile, visitor) as SourceFile;
 		};
 	};
 }

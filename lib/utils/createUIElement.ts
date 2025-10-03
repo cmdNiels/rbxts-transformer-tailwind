@@ -4,18 +4,23 @@
 
 import type UIElement from "types/elements/_UIElement";
 import type _Color3 from "types/internal/_Color3";
-import type * as ts from "typescript";
+import type { JsxElement, NodeFactory, Program } from "typescript";
 
 import createColor3Expression from "../expressions/createColor3Expression";
 import createEnumExpression from "../expressions/createEnumExpression";
 
 /**
  * Create JSX element for UI components
+ * @param program - TypeScript program instance
  * @param factory - TypeScript node factory
  * @param element - UI element configuration
  * @returns JSX element or undefined if element type not supported
  */
-export default function createUIElement(factory: ts.NodeFactory, element: UIElement): ts.JsxElement | undefined {
+export default function createUIElement(
+	program: Program,
+	factory: NodeFactory,
+	element: UIElement,
+): JsxElement | undefined {
 	switch (element.type) {
 		case "UIPadding": {
 			const paddingTop = element.PaddingTop?.Offset || 0;
@@ -251,19 +256,19 @@ export default function createUIElement(factory: ts.NodeFactory, element: UIElem
 							factory.createIdentifier("Color"),
 							factory.createJsxExpression(
 								undefined,
-								createColor3Expression(factory, element.Color as _Color3),
+								createColor3Expression(program, factory, element.Color as _Color3),
 							),
 						),
 						...(element.Transparency
 							? [
-									factory.createJsxAttribute(
-										factory.createIdentifier("Transparency"),
-										factory.createJsxExpression(
-											undefined,
-											factory.createNumericLiteral(element.Transparency),
-										),
+								factory.createJsxAttribute(
+									factory.createIdentifier("Transparency"),
+									factory.createJsxExpression(
+										undefined,
+										factory.createNumericLiteral(element.Transparency),
 									),
-								]
+								),
+							]
 							: []),
 					]),
 				),

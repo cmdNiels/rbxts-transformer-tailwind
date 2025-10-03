@@ -1,6 +1,6 @@
 import type _Color3 from "types/internal/_Color3";
 import type _UDim2 from "types/internal/_UDim2";
-import type ts from "typescript";
+import type { Expression, NodeFactory, Program } from "typescript";
 
 import createColor3Expression from "../expressions/createColor3Expression";
 import createEnumExpression from "../expressions/createEnumExpression";
@@ -9,34 +9,40 @@ import createUDim2Expression from "../expressions/createUDim2Expression";
 /**
  * Helper function to create boolean expressions
  */
-function createBooleanExpression(factory: ts.NodeFactory, value: unknown): ts.Expression {
+function createBooleanExpression(factory: NodeFactory, value: unknown): Expression {
 	return typeof value === "boolean" ? (value ? factory.createTrue() : factory.createFalse()) : factory.createFalse();
 }
 
 /**
- * Create property value expression based on key and value
+ * Create TypeScript expression for property value
+ * @param program - TypeScript program instance
  * @param factory - TypeScript node factory
- * @param key - Property key name
+ * @param key - Property key
  * @param value - Property value
  * @returns TypeScript expression for the property value
  */
-export default function createPropertyValue(factory: ts.NodeFactory, key: string, value: unknown): ts.Expression {
+export default function createPropertyValue(
+	program: Program,
+	factory: NodeFactory,
+	key: string,
+	value: unknown,
+): Expression {
 	switch (key) {
 		// Color3 properties
 		case "BackgroundColor3":
-			return createColor3Expression(factory, value as _Color3);
+			return createColor3Expression(program, factory, value as _Color3);
 		case "TextColor3":
-			return createColor3Expression(factory, value as _Color3);
+			return createColor3Expression(program, factory, value as _Color3);
 		case "ImageColor3":
-			return createColor3Expression(factory, value as _Color3);
+			return createColor3Expression(program, factory, value as _Color3);
 		case "PlaceholderColor3":
-			return createColor3Expression(factory, value as _Color3);
+			return createColor3Expression(program, factory, value as _Color3);
 		case "BorderColor3":
-			return createColor3Expression(factory, value as _Color3);
+			return createColor3Expression(program, factory, value as _Color3);
 		case "TextStrokeColor3":
-			return createColor3Expression(factory, value as _Color3);
+			return createColor3Expression(program, factory, value as _Color3);
 		case "SelectionImageColor3":
-			return createColor3Expression(factory, value as _Color3);
+			return createColor3Expression(program, factory, value as _Color3);
 
 		// UDim2 properties
 		case "Size":
@@ -88,7 +94,7 @@ export default function createPropertyValue(factory: ts.NodeFactory, key: string
 		case "ElasticBehavior":
 			return createEnumExpression(factory, "ElasticBehavior", value as string);
 		case "ScrollBarImageColor3":
-			return createColor3Expression(factory, value as _Color3);
+			return createColor3Expression(program, factory, value as _Color3);
 
 		// Image properties
 		case "ScaleType":
