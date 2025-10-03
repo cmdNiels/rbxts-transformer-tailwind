@@ -1,7 +1,7 @@
-import type _Color3 from "types/internal/_Color3";
-import type _UDim2 from "types/internal/_UDim2";
 import type { Expression, NodeFactory, Program } from "typescript";
 
+import type _Color3 from "../../types/internal/_Color3";
+import type _UDim2 from "../../types/internal/_UDim2";
 import createColor3Expression from "../expressions/createColor3Expression";
 import createEnumExpression from "../expressions/createEnumExpression";
 import createUDim2Expression from "../expressions/createUDim2Expression";

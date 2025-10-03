@@ -3,17 +3,13 @@
 	"version": "1.0.0",
 	"description": "A TypeScript transformer that converts Tailwind CSS classes to Roblox UI properties for roblox-ts projects",
 	"main": "out/lib/transformer.js",
-	"types": "react-jsx.d.ts",
-	"files": [
-		"out/**/*",
-		"react-jsx.d.ts",
-		"README.md",
-		"LICENSE"
-	],
 	"scripts": {
 		"build": "tsc",
-		"dev": "tsc --watch",
 		"prepublishOnly": "npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cmdNiels/rbxts-transformer-tailwind.git"
 	},
 	"keywords": [
 		"rbxts",
@@ -25,21 +21,15 @@
 	],
 	"author": "cmdNiels",
 	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/cmdNiels/rbxts-transformer-tailwind.git"
-	},
-	"homepage": "https://github.com/cmdNiels/rbxts-transformer-tailwind#readme",
 	"bugs": {
 		"url": "https://github.com/cmdNiels/rbxts-transformer-tailwind/issues"
 	},
-	"peerDependencies": {
-		"@rbxts/react": "^17.2.3",
-		"@rbxts/types": "^1.0.881",
-		"roblox-ts": "^3.0.0",
-		"typescript": ">=4.0.0"
+	"homepage": "https://github.com/cmdNiels/rbxts-transformer-tailwind#readme",
+	"dependencies": {
+		"typescript": "~5.5.2"
 	},
 	"devDependencies": {
+		"@rbxts/types": "^1.0.881",
 		"@types/node": "^20.0.0",
 		"@typescript-eslint/eslint-plugin": "8.33.1",
 		"@typescript-eslint/parser": "8.33.1",
@@ -51,8 +41,7 @@
 		"eslint-plugin-prettier": "5.4.1",
 		"eslint-plugin-simple-import-sort": "12.1.1",
 		"eslint-plugin-unused-imports": "4.1.4",
-		"prettier": "~3.5.3",
-		"typescript": "^5.5.3"
+		"prettier": "~3.5.3"
 	},
 	"engines": {
 		"node": ">=20.0.0"

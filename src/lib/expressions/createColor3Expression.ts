@@ -2,8 +2,9 @@
  * TypeScript expression utilities for rbxts-transformer-tailwind
  */
 
-import type _Color3 from "types/internal/_Color3";
 import type { Expression, NodeFactory, Program } from "typescript";
+
+import type _Color3 from "../../types/internal/_Color3";
 
 /**
  * Create Color3.fromRGB expression

@@ -4,13 +4,6 @@
 .vscode/
 .eslintrc.json
 .prettierrc
-.npmrc
-tsconfig.json
-package-lock.json
-
-# Source files (only built files are published)
-lib/
-types/
 
 # Documentation that shouldn't be published
 TAILWIND_CLASSES.md

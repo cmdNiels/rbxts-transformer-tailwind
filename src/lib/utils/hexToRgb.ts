@@ -2,7 +2,7 @@
  * Convert hex color string to RGB color object
  */
 
-import type _Color3 from "types/internal/_Color3";
+import type _Color3 from "../../types/internal/_Color3";
 
 /**
  * Convert hex color string to RGB color object

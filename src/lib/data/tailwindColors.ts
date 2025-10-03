@@ -1,4 +1,4 @@
-import type _Color3 from "types/internal/_Color3";
+import type _Color3 from "../../types/internal/_Color3";
 
 /**
  * Single source of truth for all Tailwind CSS color values

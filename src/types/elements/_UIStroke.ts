@@ -1,4 +1,4 @@
-import type _Color3 from "types/internal/_Color3";
+import type _Color3 from "../internal/_Color3";
 
 type _UIStroke = {
 	Radius?: number;

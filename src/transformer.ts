@@ -1,30 +1,34 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * rbxts-transformer-tailwind
  * A TypeScript transformer that converts Tailwind CSS classes to Roblox UI properties
  */
 
-import type UIElement from "types/elements/_UIElement";
 import type { Program, SourceFile, TransformationContext } from "typescript";
 import {
+	isEnumDeclaration,
+	isEnumMember,
 	isIdentifier,
+	isInterfaceDeclaration,
 	isJsxAttribute,
 	isJsxElement,
 	isJsxExpression,
 	isJsxSelfClosingElement,
 	isJsxText,
 	isStringLiteral,
+	isTypeAliasDeclaration,
+	LanguageVariant,
 	visitEachChild,
 	visitNode,
 } from "typescript";
 
-import type TailwindTransformerConfig from "../types/TailwindTransformerConfig";
-import createClassMap from "./utils/createClassMap";
-import createPropertyValue from "./utils/createPropertyValue";
-import createUIElement from "./utils/createUIElement";
-import loadTailwindConfig from "./utils/loadTailwindConfig";
-import parseClasses from "./utils/parseClasses";
-import processText from "./utils/processText";
+import createClassMap from "./lib/utils/createClassMap";
+import createPropertyValue from "./lib/utils/createPropertyValue";
+import createUIElement from "./lib/utils/createUIElement";
+import parseClasses from "./lib/utils/parseClasses";
+import processText from "./lib/utils/processText";
+import type UIElement from "./types/elements/_UIElement";
 
 /**
  * Creates a Tailwind CSS transformer for roblox-ts
@@ -33,35 +37,39 @@ import processText from "./utils/processText";
  * @param config - Transformer configuration options
  * @returns TypeScript transformer factory
  */
-export default function transform(program: Program, config?: TailwindTransformerConfig) {
-	console.log("🚀 Running Tailwind transformer");
+function transform(program: Program) {
+	console.log("🚀 Running Tailwind transformer - transform function called");
+
+	const dynamicClassMap = createClassMap();
+	console.log("🎨 Class map created with", Object.keys(dynamicClassMap).length, "classes");
 
 	return (context: TransformationContext) => {
 		const { factory } = context;
 
-		// Load Tailwind config and create class map
-		const projectRoot = process.cwd();
-		console.log("📁 Project root:", projectRoot);
-
-		const tailwindConfig = loadTailwindConfig(projectRoot, config?.tailwindConfigPath);
-		if (tailwindConfig?.theme) {
-			console.log("⚙️  Tailwind config loaded successfully");
-		}
-
-		const dynamicClassMap = createClassMap(tailwindConfig);
-		console.log("🎨 Class map created with", Object.keys(dynamicClassMap).length, "classes");
-
 		return (sourceFile: any): any => {
-			if (sourceFile.isDeclarationFile || sourceFile.fileName.endsWith(".d.ts")) {
+			console.log(`📄 Processing file: ${sourceFile.fileName}`);
+
+			// Skip node_modules
+			if (sourceFile.fileName.indexOf('node_modules') !== -1) {
 				return sourceFile;
 			}
 
-			// Only process .tsx and .jsx files
-			if (!sourceFile.fileName.endsWith(".tsx") && !sourceFile.fileName.endsWith(".jsx")) {
+			// Only process .tsx files (JSX/TSX files that contain React components)
+			if (sourceFile.languageVariant !== LanguageVariant.JSX) {
 				return sourceFile;
 			}
 
 			function visitor(node: any): any {
+				// Skip type-only declarations and enum members that don't need transformation
+				if (
+					isEnumDeclaration(node) ||
+					isEnumMember(node) ||
+					isInterfaceDeclaration(node) ||
+					isTypeAliasDeclaration(node)
+				) {
+					return node;
+				}
+
 				// Only process JSX elements
 				if (isJsxElement(node) || isJsxSelfClosingElement(node)) {
 					const attributes = isJsxElement(node) ? node.openingElement.attributes : node.attributes;
@@ -97,11 +105,13 @@ export default function transform(program: Program, config?: TailwindTransformer
 							classNames = classNameAttr.initializer.expression.text;
 						}
 
+						console.log("Found className:", classNames);
+
 						const { properties, uiElements } = parseClasses(
 							classNames,
 							dynamicClassMap,
-							config?.warnUnknownClasses,
 						);
+
 
 						const newAttributes: any[] = [...otherAttributes];
 
@@ -157,13 +167,13 @@ export default function transform(program: Program, config?: TailwindTransformer
 						for (const key of Object.keys(props)) {
 							if (
 								Object.prototype.hasOwnProperty.call(props, key) &&
-								![
+								[
 									"FontWeight",
 									"FontFamily",
 									"FontStyle",
 									"_textDecoration",
 									"_textTransform",
-								].includes(key)
+								].indexOf(key) === -1
 							) {
 								const value = props[key];
 								newAttributes.push(
@@ -306,18 +316,19 @@ export default function transform(program: Program, config?: TailwindTransformer
 							);
 						}
 					}
+
+					// Continue visiting children of JSX elements that don't have className
+					return visitEachChild(node, visitor, context);
 				}
 
-				// For non-JSX nodes, continue visiting children but handle errors gracefully
-				try {
-					return visitEachChild(node, visitor, context);
-				} catch {
-					// If visiting fails (e.g., enum members), just return the original node
-					return node;
-				}
+				// For all other nodes (non-JSX), continue traversing the tree
+				return visitEachChild(node, visitor, context);
 			}
 
+			// Visit all nodes in the source file
 			return visitNode(sourceFile, visitor) as SourceFile;
 		};
 	};
 }
+
+export = transform;

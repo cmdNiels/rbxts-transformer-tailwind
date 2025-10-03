@@ -2,9 +2,8 @@
  * Parse className string into properties and UI elements
  */
 
-import type _UDim2 from "types/internal/_UDim2";
-
 import type ClassMapping from "../../types/ClassMapping";
+import type _UDim2 from "../../types/internal/_UDim2";
 
 /**
  * Parse className string into properties and UI elements
@@ -39,7 +38,9 @@ export default function parseClasses(
 					uiElementsMap[elementType] = elementConfig;
 				} else {
 					// Merge properties for the same UI element type
-					Object.assign(uiElementsMap[elementType], elementConfig);
+					Object.keys(elementConfig).forEach((key) => {
+						uiElementsMap[elementType][key] = elementConfig[key];
+					});
 				}
 			} else if (mapping.Size) {
 				// Handle Size property specially to merge X and Y
@@ -60,7 +61,7 @@ export default function parseClasses(
 	}
 
 	// Convert uiElementsMap back to array
-	const uiElements = Object.values(uiElementsMap);
+	const uiElements = Object.keys(uiElementsMap).map((key) => uiElementsMap[key]);
 
 	// Build final Size if either x or y was specified
 	if (size.X || size.Y) {
@@ -71,8 +72,8 @@ export default function parseClasses(
 	}
 
 	if (automaticSizeValues.length > 0) {
-		const hasX = automaticSizeValues.includes("X");
-		const hasY = automaticSizeValues.includes("Y");
+		const hasX = automaticSizeValues.indexOf("X") !== -1;
+		const hasY = automaticSizeValues.indexOf("Y") !== -1;
 
 		if (hasX && hasY) {
 			(properties as Record<string, unknown>).AutomaticSize = "XY";

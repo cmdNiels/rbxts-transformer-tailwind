@@ -2,10 +2,10 @@
  * Create JSX element for UI components
  */
 
-import type UIElement from "types/elements/_UIElement";
-import type _Color3 from "types/internal/_Color3";
 import type { JsxElement, NodeFactory, Program } from "typescript";
 
+import type UIElement from "../../types/elements/_UIElement";
+import type _Color3 from "../../types/internal/_Color3";
 import createColor3Expression from "../expressions/createColor3Expression";
 import createEnumExpression from "../expressions/createEnumExpression";
 
@@ -261,14 +261,14 @@ export default function createUIElement(
 						),
 						...(element.Transparency
 							? [
-								factory.createJsxAttribute(
-									factory.createIdentifier("Transparency"),
-									factory.createJsxExpression(
-										undefined,
-										factory.createNumericLiteral(element.Transparency),
+									factory.createJsxAttribute(
+										factory.createIdentifier("Transparency"),
+										factory.createJsxExpression(
+											undefined,
+											factory.createNumericLiteral(element.Transparency),
+										),
 									),
-								),
-							]
+								]
 							: []),
 					]),
 				),

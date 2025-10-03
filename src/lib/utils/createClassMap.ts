@@ -49,7 +49,8 @@ export default function createClassMap(
 
 	// Extend with Tailwind config if available
 	if (tailwindConfig?.theme?.extend?.colors) {
-		for (const [colorName, colorValue] of Object.entries(tailwindConfig.theme.extend.colors)) {
+		Object.keys(tailwindConfig.theme!.extend!.colors!).forEach((colorName) => {
+			const colorValue = tailwindConfig.theme!.extend!.colors![colorName];
 			if (typeof colorValue === "string") {
 				const rgb = hexToRgb(colorValue);
 				if (rgb) {
@@ -65,7 +66,7 @@ export default function createClassMap(
 					};
 				}
 			}
-		}
+		});
 	}
 
 	// Return the class map with Tailwind config extensions
