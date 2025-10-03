@@ -7,4 +7,4 @@ export default {
 	"z-30": { ZIndex: 30 },
 	"z-40": { ZIndex: 40 },
 	"z-50": { ZIndex: 50 },
-} as Record<string, ClassMapping>;
+} satisfies Record<string, ClassMapping>;

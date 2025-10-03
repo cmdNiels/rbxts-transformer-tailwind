@@ -6,4 +6,4 @@ export default {
 	truncate: { TextTruncate: "SplitWord" },
 	"text-ellipsis": { TextTruncate: "AtEnd" },
 	...generateTextColorClasses(),
-} as Record<string, ClassMapping>;
+} satisfies Record<string, ClassMapping>;

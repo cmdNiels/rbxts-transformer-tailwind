@@ -4,4 +4,4 @@ import generateBackgroundColorClasses from "../utils/colors/generateBackgroundCo
 export default {
 	"bg-transparent": { BackgroundTransparency: 1 },
 	...generateBackgroundColorClasses(),
-} as Record<string, ClassMapping>;
+} satisfies Record<string, ClassMapping>;

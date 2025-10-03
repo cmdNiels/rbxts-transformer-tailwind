@@ -56,4 +56,4 @@ export default {
 	lowercase: { _textTransform: "lowercase" },
 	capitalize: { _textTransform: "capitalize" },
 	"normal-case": { _textTransform: "none" },
-} as Record<string, ClassMapping>;
+} satisfies Record<string, ClassMapping>;

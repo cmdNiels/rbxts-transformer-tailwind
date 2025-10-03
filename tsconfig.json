@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"module": "CommonJS",
+		"module": "commonjs",
 		"outDir": "out",
 		"rootDir": "src",
 
@@ -12,18 +12,7 @@
 		"forceConsistentCasingInFileNames": true,
 
 		"removeComments": false
-
-		// "allowSyntheticDefaultImports": true,
-		// "moduleResolution": "node",
-		// "resolveJsonModule": true,
-		// "skipDefaultLibCheck": true,
-		// "noEmit": false,
-		// "noImplicitAny": true,
-		// "noImplicitReturns": true,
-		// "noUnusedLocals": true,
-		// "noUnusedParameters": true,
-		// "exactOptionalPropertyTypes": true
 	},
-	"include": ["src/**/*.ts", "react-jsx.d.ts"],
+	"include": ["src/**/*"],
 	"exclude": ["node_modules", "out"]
 }

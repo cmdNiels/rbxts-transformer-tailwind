@@ -3,4 +3,4 @@ import generatePlaceholderColorClasses from "../utils/colors/generatePlaceholder
 
 export default {
 	...generatePlaceholderColorClasses(),
-} as Record<string, ClassMapping>;
+} satisfies Record<string, ClassMapping>;

@@ -16,4 +16,4 @@ export default {
 	"order-11": { LayoutOrder: 11 },
 	"order-12": { LayoutOrder: 12 },
 	"order-last": { LayoutOrder: 999999999 },
-} as Record<string, ClassMapping>;
+} satisfies Record<string, ClassMapping>;

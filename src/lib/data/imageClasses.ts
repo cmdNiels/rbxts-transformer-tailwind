@@ -3,4 +3,4 @@ import generateImageColorClasses from "../utils/colors/generateImageColorClasses
 
 export default {
 	...generateImageColorClasses(),
-} as Record<string, ClassMapping>;
+} satisfies Record<string, ClassMapping>;

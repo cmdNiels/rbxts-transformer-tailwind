@@ -294,4 +294,4 @@ export const tailwindColors: Record<string, _Color3> = {
 	"rose-800": { R: 0.62, G: 0.176, B: 0.275 },
 	"rose-900": { R: 0.525, G: 0.149, B: 0.243 },
 	"rose-950": { R: 0.29, G: 0.063, B: 0.133 },
-};
+} satisfies Record<string, _Color3>;

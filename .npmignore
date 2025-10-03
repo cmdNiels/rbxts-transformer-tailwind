@@ -5,6 +5,10 @@
 .eslintrc.json
 .prettierrc
 
+src/
+
+tsconfig.json
+
 # Documentation that shouldn't be published
 TAILWIND_CLASSES.md
 
