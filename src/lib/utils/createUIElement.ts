@@ -6,6 +6,7 @@ import type { JsxElement, NodeFactory, Program } from "typescript";
 
 import type UIElement from "../../types/elements/_UIElement";
 import type _Color3 from "../../types/internal/_Color3";
+import type _UDim from "../../types/internal/_UDim";
 import createColor3Expression from "../expressions/createColor3Expression";
 import createEnumExpression from "../expressions/createEnumExpression";
 
@@ -92,7 +93,7 @@ export default function createUIElement(
 								undefined,
 								factory.createNewExpression(factory.createIdentifier("UDim"), undefined, [
 									factory.createNumericLiteral(0),
-									factory.createNumericLiteral(element.CornerRadius as number),
+									factory.createNumericLiteral((element.CornerRadius as _UDim)?.Offset || 0),
 								]),
 							),
 						),
