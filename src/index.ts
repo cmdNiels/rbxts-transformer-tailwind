@@ -47,8 +47,6 @@ function transform(program: Program) {
 		const { factory } = context;
 
 		return (sourceFile: any): any => {
-			console.log(`📄 Processing file: ${sourceFile.fileName}`);
-
 			// Skip node_modules
 			if (sourceFile.fileName.indexOf('node_modules') !== -1) {
 				return sourceFile;
@@ -104,8 +102,6 @@ function transform(program: Program) {
 						) {
 							classNames = classNameAttr.initializer.expression.text;
 						}
-
-						console.log("Found className:", classNames);
 
 						const { properties, uiElements } = parseClasses(
 							classNames,
