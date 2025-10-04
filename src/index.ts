@@ -38,10 +38,8 @@ import type UIElement from "./types/elements/_UIElement";
  * @returns TypeScript transformer factory
  */
 function transform(program: Program) {
-	console.log("🚀 Running Tailwind transformer - transform function called");
-
 	const dynamicClassMap = createClassMap();
-	console.log("🎨 Class map created with", Object.keys(dynamicClassMap).length, "classes");
+	console.log("[rbxts-transformer-tailwind] Class map created with", Object.keys(dynamicClassMap).length, "classes");
 
 	return (context: TransformationContext) => {
 		const { factory } = context;
